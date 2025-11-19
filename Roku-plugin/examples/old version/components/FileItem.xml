@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--********** Seedr for Roku - File Item Component **********-->
+
+<component name="FileItem" extends="Group">
+    <script type="text/brightscript" uri="FileItem.brs" />
+    
+    <interface>
+        <field id="itemContent" type="node" onChange="showContent" />
+        <field id="focusPercent" type="float" onChange="focusPercentChanged" />
+    </interface>
+    
+    <children>
+        <!-- Background -->
+        <Rectangle id="background" width="400" height="300" color="0x2a2a2aFF" />
+        
+        <!-- Focus Rectangle -->
+        <Rectangle id="focusRect" width="400" height="300" color="0x4a90e2FF" opacity="0.0" />
+        
+        <!-- Poster/Thumbnail -->
+        <Poster id="poster" 
+                width="400" 
+                height="225" 
+                translation="[0, 0]"
+                loadDisplayMode="scaleToFit" />
+        
+        <!-- Title Background -->
+        <Rectangle id="titleBg" 
+                   width="400" 
+                   height="75" 
+                   translation="[0, 225]" 
+                   color="0x000000CC" />
+        
+        <!-- Title Label -->
+        <Label id="titleLabel" 
+               width="380" 
+               height="55" 
+               translation="[10, 235]" 
+               font="font:MediumBoldSystemFont" 
+               color="0xFFFFFFFF" 
+               wrap="true" 
+               maxLines="2" 
+               horizAlign="left" 
+               vertAlign="center" />
+    </children>
+</component>
+

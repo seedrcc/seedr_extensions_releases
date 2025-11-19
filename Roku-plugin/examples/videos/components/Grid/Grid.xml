@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="Grid" extends="Group"  initialFocus="RowList">
+    <script type="text/brightscript" uri="Grid.brs" />
+	 <interface>
+        <field id="content" type="node" alias="RowList.content" />
+        <field id="rowItemSelected" type="intarray" alwaysnotify="true" alias="RowList.rowItemSelected" />
+        <field id="jumpToRowItem" type="intarray" alias="RowList.jumpToRowItem" />
+    </interface>
+    <children>
+        <Poster id="poster" translation="[400,0]"/>
+        <Poster uri="pkg:/images/customOverlay.png" width="1280"  height="720"  translation="[0,0]"/>
+        <Label id="titleLabel" width="510" translation="[130,120]"><Font role="font" uri="pkg:/fonts/AvenirNextBold/AvenirNext-Bold.ttf" size="40"/></Label>
+        <Label id="date" width="300" translation="[130,190]"/>
+        <Label id="quality" width="100" translation="[280,190]"> <Font role="font" uri="pkg:/fonts/AvenirNextBold/AvenirNext-Bold.ttf" size="20"/></Label>
+        <Label id="descriptionLabel" wrap="true" width="510" numLines="3" translation="[130,220]" />
+        <Label id="genre" width="100" translation="[130,320]"/>
+        <RowList showRowCounter="[true]"  itemComponentName="RowListComponent" id="rowList" translation="[80,350]"  numRows="2" rowitemSize="[[320,180]]" rowItemSpacing="[[20,0]]" itemSize="[1100,270]" rowLabelOffset="[[50,20]]" focusXOffset="[50]" showRowLabel="[true]" rowFocusAnimationStyle="floatingfocus" />
+    </children>
+</component>

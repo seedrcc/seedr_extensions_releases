@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component name="MainScene" extends="Scene">
+    <script type="text/brightscript" uri="pkg:/components/MainScene.brs" />
+    <children>
+
+        <ChannelStore id="store" />
+
+        <Label
+            id="title"
+            text="Roku Pay Demo: select an item to purchase"
+            width="1280"
+            height="100"
+            translation="[0, 0]"
+            horizAlign="center"
+            vertAlign="center"
+        />
+
+        <LabelList
+            id="productsList"
+            focusable="true"
+            itemSize="[400, 100]"
+            translation="[0, 100]" />
+
+        <ScrollableText
+            id="textContent"
+            horizAlign = "left"
+            vertAlign = "top"
+            width="880"
+            height="620"
+            translation="[450, 100]"
+            text=""/>
+
+    </children>
+</component>

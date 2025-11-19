@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Seedr Hero Screen Component -->
+
+<component name="HeroScreen" extends="Group" initialFocus="RowList">
+
+  <children>
+    <!-- For transition animation -->
+    <Rectangle
+      id="background"
+      width="1920"
+      height="1080"
+      color="0x000000"
+      opacity="0.8" />
+
+    <!-- The main content -->
+    <RowList
+	    id="RowList"
+      itemComponentName="CustomItem"
+      focusXOffset="[165]"
+      itemSize="[1920,300]"
+      numRows="4"
+      rowFocusAnimationStyle="FixedFocusWrap"
+      rowHeights="[400,300,300,300]"
+      rowItemSize="[[800,350],[375,197],[375,197],[375,197]]"
+      rowItemSpacing="[[30,20],[30,20],[30,20],[30,20]]"
+      rowLabelOffset="[[165,8],[165,8],[165,8],[165,8]]"
+      showRowLabel="[true,true,true,true]"
+      showRowCounter="[true,true,true,true]"
+      translation="[0,155]"/>
+
+    <!-- Breadcrumb navigation -->
+    <Group id="breadcrumbGroup" translation="[165, 120]">
+      <Label id="breadcrumbLabel" text="Home" 
+             font="font:MediumSystemFont" 
+             color="0xCCCCCCFF" />
+    </Group>
+
+    <!-- For transition animation -->
+    <Poster
+      translation="[0,1000]"
+      uri="pkg:/images/BG_dark_down.png"
+      width="2000"
+      height="95" />
+  </children>
+
+  <interface>
+    <!-- Grid Content Node -->
+    <field id="content" type="node" alias="RowList.content" />
+
+    <!-- Row item selection handler -->
+    <field id="rowItemSelected" type="intarray" alias="RowList.rowItemSelected" alwaysnotify="true"/>
+
+    <!-- Row item focused handler - sets background image uri and focusedContent field -->
+    <field id="itemFocused" type="intarray" alias="RowList.rowItemFocused" onChange="onItemFocused"/>
+
+    <!-- Interface to focused item (Content Node) -->
+    <field id="focusedContent"  type="node"/>
+
+    <!-- # of requests that have bad/no content (not a 200 response) -->
+    <field id="numBadRequests" type="integer"/>
+
+    <!-- Current folder tracking -->
+    <field id="currentFolderId" type="string" value="" />
+    <field id="folderStack" type="array" />
+  </interface>
+
+  <script type="text/brightscript" uri="HeroScreen.brs" />
+  <script type="text/brightscript" uri="pkg:/source/auth.brs" />
+
+</component>

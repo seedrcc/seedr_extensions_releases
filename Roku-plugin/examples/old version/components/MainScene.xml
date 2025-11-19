@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--********** Seedr for Roku - Main Scene **********-->
+
+<component name="MainScene" extends="Scene">
+    <script type="text/brightscript" uri="MainScene.brs" />
+    <script type="text/brightscript" uri="pkg:/source/utils.brs" />
+    <script type="text/brightscript" uri="pkg:/source/api.brs" />
+    <script type="text/brightscript" uri="pkg:/source/auth.brs" />
+    
+    <interface>
+        <field id="authComplete" type="boolean" />
+        <field id="playVideo" type="assocarray" />
+        <field id="screenWidth" type="integer" />
+        <field id="screenHeight" type="integer" />
+    </interface>
+    
+    <children>
+        <!-- Background -->
+        <Rectangle id="background" width="1920" height="1080" color="0x000000FF" />
+        <Poster id="backgroundImage" 
+                width="1920" 
+                height="1080" 
+                uri="pkg:/images/background.jpg" 
+                loadDisplayMode="scaleToFill" 
+                opacity="0.3" />
+        
+        <!-- App Header -->
+        <Rectangle id="header" width="1920" height="100" color="0x1E1E1EFF">
+            <Label id="titleLabel" text="Seedr" 
+                   font="font:LargeBoldSystemFont" 
+                   translation="[50, 30]" 
+                   color="0xFFFFFFFF" />
+            <Label id="statusLabel" text="" 
+                   font="font:MediumSystemFont" 
+                   translation="[1600, 35]" 
+                   color="0xCCCCCCFF" />
+        </Rectangle>
+        
+        <!-- Content Area -->
+        <Group id="contentGroup" translation="[0, 100]">
+            <!-- Authentication Screen (shown initially) -->
+            <AuthScreen id="authScreen" visible="true" />
+            
+            <!-- Grid Screen (shown after auth) -->
+            <GridScreen id="gridScreen" visible="false" />
+            
+            <!-- Video Player (shown during playback) -->
+            <VideoPlayer id="videoPlayer" visible="false" />
+        </Group>
+        
+        <!-- Loading Indicator -->
+        <Group id="loadingIndicator" visible="false" translation="[960, 540]">
+            <Rectangle width="200" height="100" color="0x000000CC" />
+            <Label text="Loading..." 
+                   font="font:MediumBoldSystemFont" 
+                   color="0xFFFFFFFF" 
+                   translation="[100, 50]" 
+                   horizAlign="center" 
+                   vertAlign="center" />
+        </Group>
+        
+        <!-- Error Dialog -->
+        <Group id="errorDialog" visible="false" translation="[460, 340]">
+            <Rectangle width="1000" height="400" color="0x000000EE" />
+            <Rectangle width="996" height="396" color="0xFFFFFFFF" translation="[2, 2]" />
+            <Label id="errorTitle" text="Error" 
+                   font="font:LargeBoldSystemFont" 
+                   color="0x000000FF" 
+                   translation="[50, 50]" />
+            <Label id="errorMessage" text="" 
+                   font="font:MediumSystemFont" 
+                   color="0x333333FF" 
+                   translation="[50, 100]" 
+                   width="900" 
+                   wrap="true" />
+            <Button id="errorOkButton" text="OK" 
+                    translation="[450, 300]" 
+                    minWidth="100" />
+        </Group>
+    </children>
+</component> 

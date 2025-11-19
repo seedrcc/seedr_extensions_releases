@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component name="PurchaseHandler" extends="Group">
+    <script type="text/brightscript" uri="pkg:/components/PurchaseHandler.brs" />
+    
+    <interface>
+        <!-- Fields for subscription management -->
+        <field id="initPurchaseSystem" type="boolean" alwaysNotify="true" />
+        <field id="getCatalog" type="boolean" alwaysNotify="true" />
+        <field id="getPurchases" type="boolean" alwaysNotify="true" />
+        <field id="orderProduct" type="string" />
+        
+        <!-- Output fields -->
+        <field id="catalogReady" type="boolean" />
+        <field id="purchasesReady" type="boolean" />
+        <field id="catalogData" type="assocarray" />
+        <field id="purchasesData" type="assocarray" />
+        <field id="orderComplete" type="assocarray" />
+        <field id="subscriptionStatus" type="assocarray" />
+        
+        <!-- Error handling -->
+        <field id="error" type="string" />
+    </interface>
+    
+    <children>
+        <!-- Roku ChannelStore node for in-app purchasing -->
+        <ChannelStore id="channelStore" />
+    </children>
+</component>

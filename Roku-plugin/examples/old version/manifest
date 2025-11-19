@@ -1,0 +1,22 @@
+# App Information
+title=Seedr for Roku
+subtitle=Stream your Seedr files
+major_version=1
+minor_version=0
+build_version=1
+
+# Channel Assets
+mm_icon_focus_hd=pkg:/images/icon_focus_hd.png
+splash_screen_hd=pkg:/images/splash_hd.jpg
+splash_min_time=1000
+
+# Resolution Support
+ui_resolutions=hd,fhd
+supports_input_launch=1
+
+# Required Capabilities
+requires_certificate=true
+supports_video_playback=true
+
+# Network Access
+network_access=true 

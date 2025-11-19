@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--********** Seedr for Roku - Hero Main Scene **********-->
+
+<component name="HeroMainScene" extends="Scene">
+    <script type="text/brightscript" uri="HeroMainScene.brs" />
+    <script type="text/brightscript" uri="pkg:/source/utils.brs" />
+    <script type="text/brightscript" uri="pkg:/source/api.brs" />
+    <script type="text/brightscript" uri="pkg:/source/auth.brs" />
+    
+    <interface>
+        <field id="authComplete" type="boolean" />
+        <field id="playVideo" type="assocarray" />
+        <field id="screenWidth" type="integer" />
+        <field id="screenHeight" type="integer" />
+        <field id="content" type="node" />
+        <field id="numBadRequests" type="integer" value="0" />
+        <field id="rowItemSelected" type="intarray" alwaysNotify="true" />
+        <field id="itemFocused" type="intarray" />
+    </interface>
+    
+    <children>
+        <!-- Background -->
+        <Rectangle id="background" width="1920" height="1080" color="0x000000FF" />
+        <Poster id="backgroundImage" 
+                width="1920" 
+                height="1080" 
+                uri="pkg:/images/background.jpg" 
+                loadDisplayMode="scaleToFill" 
+                opacity="0.3" />
+        
+        <!-- App Header -->
+        <Rectangle id="header" width="1920" height="100" color="0x1E1E1EFF">
+            <Label id="titleLabel" text="Seedr" 
+                   font="font:LargeBoldSystemFont" 
+                   translation="[50, 30]" 
+                   color="0xFFFFFFFF" />
+            <Label id="statusLabel" text="" 
+                   font="font:MediumSystemFont" 
+                   translation="[1600, 35]" 
+                   color="0xCCCCCCFF" />
+        </Rectangle>
+        
+        <!-- Content Area -->
+        <Group id="contentGroup" translation="[0, 100]">
+            <!-- Authentication Screen (shown initially) -->
+            <AuthScreen id="authScreen" visible="true" />
+            
+            <!-- Hero Screen (shown after auth) -->
+            <HeroScreen id="heroScreen" visible="false" />
+            
+            <!-- Video Player (shown during video playback) -->
+            <VideoPlayer id="videoPlayer" visible="false" />
+            
+            <!-- Audio Player (shown during audio playback) -->
+            <AudioPlayer id="audioPlayer" visible="false" />
+        </Group>
+        
+        <!-- Loading Indicator -->
+        <LoadingIndicator
+            id="loadingIndicator"
+            imageUri="pkg:/images/loader.png"
+            clockwise="true"
+            spinInterval="2"
+            fadeInterval="0.5"
+            spacing="20"
+            imageWidth="100"
+            text="Loading..."
+            width="1920"
+            height="1080"
+            centered="false"
+            translation="[0, 0]"
+            textPadding="10"
+            font="font:SmallBoldSystemFont"
+            backgroundColor="0x551A8B"
+            backgroundOpacity="0"
+            visible="false" />
+        
+        <!-- Error Dialog -->
+        <Group id="errorDialog" visible="false" translation="[460, 340]">
+            <Rectangle width="1000" height="400" color="0x000000EE" />
+            <Rectangle width="996" height="396" color="0xFFFFFFFF" translation="[2, 2]" />
+            <Label id="errorTitle" text="Error" 
+                   font="font:LargeBoldSystemFont" 
+                   color="0x000000FF" 
+                   translation="[50, 50]" />
+            <Label id="errorMessage" text="" 
+                   font="font:MediumSystemFont" 
+                   color="0x333333FF" 
+                   translation="[50, 100]" 
+                   width="900" 
+                   wrap="true" />
+            <Button id="errorOkButton" text="OK" 
+                    translation="[450, 300]" 
+                    minWidth="100" />
+        </Group>
+
+        <!-- Warning Dialog for content loading issues -->
+        <Dialog
+            id="warningDialog"
+            title="Content Loading Failed"
+            message="The content is not available at this time. Press OK to continue or 'back' to retry."
+            visible="false" />
+
+        <!-- Fade Animations -->
+        <ParallelAnimation id="fadeIn">
+            <Animation
+                id="heroFadeOut"
+                duration=".4"
+                repeat="false"
+                easeFunction="inQuad">
+                <FloatFieldInterpolator
+                    id="heroFadeOutInterp"
+                    key="[0,1]"
+                    keyValue="[1.0, 0.0]"
+                    fieldToInterp="heroScreen.opacity"/>
+            </Animation>
+        </ParallelAnimation>
+
+        <ParallelAnimation id="fadeOut">
+            <Animation
+                id="heroFadeIn"
+                duration=".4"
+                repeat="false"
+                easeFunction="inQuad">
+                <FloatFieldInterpolator
+                    id="heroFadeInInterp"
+                    key="[0,1]"
+                    keyValue="[0.0, 1.0]"
+                    fieldToInterp="heroScreen.opacity"/>
+            </Animation>
+        </ParallelAnimation>
+    </children>
+</component>

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--********** Modern Device Authorization Screen - Spotify Style **********-->
+
+<component name="DeviceAuthScreen" extends="Group">
+    <script type="text/brightscript" uri="pkg:/source/utils.brs" />
+    <script type="text/brightscript" uri="pkg:/source/api.brs" />
+    <script type="text/brightscript" uri="pkg:/source/auth.brs" />
+    <script type="text/brightscript" uri="DeviceAuthScreen.brs" />
+    
+    <interface>
+        <field id="authComplete" type="boolean" />
+        <field id="backPressed" type="boolean" alwaysNotify="true" />
+    </interface>
+    
+    <children>
+        <!-- Dark background -->
+        <Rectangle id="background" width="1920" height="1080" color="0x121212FF" />
+        
+        <!-- Subtle gradient overlay -->
+        <Rectangle width="1920" height="1080" color="0x000000FF" opacity="0.4" />
+        
+        <!-- SEEDR Logo (top left) -->
+        <Label text="SEEDR" 
+               font="font:LargeBoldSystemFont" 
+               color="0x1DB954FF" 
+               translation="[80, 50]" 
+               horizAlign="left" />
+        
+        <!-- Main Authorization Container -->
+        <Group id="mainAuthContainer" visible="true" translation="[0, 0]">
+            
+            <!-- Loading State (Initially visible) -->
+            <Group id="loadingState" visible="false" translation="[0, 0]">
+                <Rectangle width="400" height="100" color="0x1a1a1aFF" translation="[-200, -50]" opacity="0.9" />
+                
+                <Label text="Setting up authentication..." 
+                       font="font:MediumSystemFont" 
+                       color="0xFFFFFFFF" 
+                       translation="[0, 0]" 
+                       horizAlign="center" />
+                
+                <!-- Loading spinner placeholder -->
+                <Rectangle id="spinner" width="30" height="30" color="0x1DB954FF" translation="[-15, 30]" opacity="0.8" />
+            </Group>
+            
+            <!-- Main Auth Options (visible after loading) -->
+            <Group id="authOptionsContainer" visible="true" translation="[50, 120]">
+                
+                <!-- Option 1: QR Code Section -->
+                <Group id="qrSection" translation="[0, 0]">
+                    <!-- Option header -->
+                    <Label text="Option 1" 
+                           font="font:SmallSystemFont" 
+                           color="0x888888FF" 
+                           translation="[0, -40]" />
+                    
+                    <Label text="Scan this QR code" 
+                           font="font:LargeBoldSystemFont" 
+                           color="0xFFFFFFFF" 
+                           translation="[0, 0]" />
+                    
+                    <!-- QR Code Container -->
+                    <Rectangle width="240" height="240" color="0xFFFFFFFF" translation="[0, 40]">
+                        <!-- Actual QR Code Image -->
+                        <Poster id="qrCodeImage" 
+                                width="220" 
+                                height="220" 
+                                translation="[10, 10]"
+                                loadDisplayMode="scaleToFit"
+                                failedBitmapUri=""
+                                visible="false" />
+                        
+                        <!-- Loading/Fallback QR text placeholder -->
+                        <Label id="qrCodeText" 
+                               text="Loading QR..." 
+                               font="font:MediumBoldSystemFont" 
+                               color="0x333333FF" 
+                               translation="[120, 120]" 
+                               horizAlign="center" 
+                               vertAlign="center" />
+                    </Rectangle>
+                    
+                    <!-- Show the code below QR code -->
+                    <Label id="qrCodeLabel" 
+                           text="CODE: XXXXXX" 
+                           font="font:SmallBoldSystemFont" 
+                           color="0x1DB954FF" 
+                           translation="[120, 290]" 
+                           horizAlign="center" />
+                    
+                    <!-- QR Instructions -->
+                    <Label text="On your mobile phone, open" 
+                           font="font:SmallSystemFont" 
+                           color="0xCCCCCCFF" 
+                           translation="[0, 300]" 
+                           width="240" />
+                    
+                    <Label text="the camera and point to this" 
+                           font="font:SmallSystemFont" 
+                           color="0xCCCCCCFF" 
+                           translation="[0, 325]" 
+                           width="240" />
+                    
+                    <Label text="code." 
+                           font="font:SmallSystemFont" 
+                           color="0xCCCCCCFF" 
+                           translation="[0, 350]" 
+                           width="240" />
+                </Group>
+                
+                <!-- Divider -->
+                <Rectangle width="1" height="400" color="0x333333FF" translation="[450, 40]" />
+                
+                <!-- Option 2: Web Page Section -->
+                <Group id="webSection" translation="[500, 0]">
+                    <!-- Option header -->
+                    <Label text="Option 2" 
+                           font="font:SmallSystemFont" 
+                           color="0x888888FF" 
+                           translation="[0, -40]" />
+                    
+                    <Label text="Use a webpage" 
+                           font="font:LargeBoldSystemFont" 
+                           color="0xFFFFFFFF" 
+                           translation="[0, 0]" />
+                    
+                    <!-- Step 1: URL -->
+                    <Label text="1. On your mobile phone or computer, type the address below:" 
+                           font="font:SmallSystemFont" 
+                           color="0xCCCCCCFF" 
+                           translation="[0, 40]" 
+                           width="400" 
+                           wrap="true" />
+                    
+                    <!-- URL Box -->
+                    <Rectangle width="450" height="80" color="0x333333FF" translation="[0, 90]">
+                        <Label id="authUrlLabel" 
+                               text="seedr.cc/pair" 
+                               font="font:SmallBoldSystemFont" 
+                               color="0xFFFFFFFF" 
+                               translation="[10, 10]" 
+                               width="430" 
+                               height="60"
+                               horizAlign="left" 
+                               vertAlign="top"
+                               wrap="true" />
+                    </Rectangle>
+                    
+                    <!-- Step 2: Code -->
+                    <Label text="2. Follow the steps and when asked, type this code:" 
+                           font="font:SmallSystemFont" 
+                           color="0xCCCCCCFF" 
+                           translation="[0, 160]" 
+                           width="360" 
+                           wrap="true" />
+                    
+                    <!-- OR divider -->
+                    <Label text="OR" 
+                           font="font:MediumBoldSystemFont" 
+                           color="0x888888FF" 
+                           translation="[0, 230]" 
+                           horizAlign="center" />
+                    
+                    <!-- Alternative: Enter code manually -->
+                    <Label text="Enter this code if prompted:" 
+                           font="font:SmallSystemFont" 
+                           color="0xCCCCCCFF" 
+                           translation="[0, 270]" 
+                           width="450" />
+                    
+                    <!-- Code Display (smaller, as alternative) -->
+                    <Rectangle width="200" height="50" color="0x333333FF" translation="[125, 300]">
+                        <Label id="userCodeLabel" 
+                               text="XXXXXX" 
+                               font="font:LargeBoldSystemFont" 
+                               color="0x1DB954FF" 
+                               translation="[100, 25]" 
+                               horizAlign="center" 
+                               vertAlign="center" />
+                    </Rectangle>
+                </Group>
+            </Group>
+            
+            <!-- Timer and Status (below main options) -->
+            <Group id="statusSection" translation="[50, 500]">
+                <!-- Timer Bar -->
+                <Rectangle id="timerBarBg" width="600" height="4" color="0x333333FF" translation="[0, 0]" />
+                <Rectangle id="timerBar" width="600" height="4" color="0x1DB954FF" translation="[0, 0]" />
+                
+                <!-- Status Text -->
+                <Label id="statusLabel" 
+                       text="Waiting for authorization..." 
+                       font="font:SmallSystemFont" 
+                       color="0x888888FF" 
+                       translation="[0, 20]" 
+                       horizAlign="left" />
+                
+                <!-- Timer Text -->
+                <Label id="timerLabel" 
+                       text="" 
+                       font="font:SmallSystemFont" 
+                       color="0xCCCCCCFF" 
+                       translation="[0, 45]" 
+                       horizAlign="left" />
+                    </Group>
+                    
+
+        </Group>
+        
+        <!-- Success State Overlay -->
+        <Group id="successState" visible="false" translation="[960, 540]">
+            <!-- Success card background -->
+            <Rectangle width="500" height="300" color="0x1a1a1aFF" translation="[-250, -150]" opacity="0.95" />
+            <Rectangle width="496" height="296" color="0x1DB95422" translation="[-248, -148]" />
+            
+            <!-- Success checkmark -->
+            <Group translation="[0, -60]">
+                <Rectangle width="80" height="80" color="0x1DB954FF" translation="[-40, -40]" />
+                <Label text="✓" 
+                       font="font:VeryLargeBoldSystemFont" 
+                       color="0xFFFFFFFF" 
+                       translation="[0, 0]" 
+                       horizAlign="center" 
+                       vertAlign="center" />
+            </Group>
+            
+            <!-- Success message -->
+            <Label text="Successfully connected!" 
+                   font="font:LargeBoldSystemFont" 
+                   color="0xFFFFFFFF" 
+                   translation="[0, 30]" 
+                   horizAlign="center" />
+            
+            <Label text="Loading your media library..." 
+                   font="font:MediumSystemFont" 
+                   color="0xCCCCCCFF" 
+                   translation="[0, 70]" 
+                   horizAlign="center" />
+        </Group>
+        
+        <!-- Error State Overlay -->
+        <Group id="errorState" visible="false" translation="[960, 540]">
+            <!-- Error card background -->
+            <Rectangle width="500" height="250" color="0x1a1a1aFF" translation="[-250, -125]" opacity="0.95" />
+            <Rectangle width="496" height="246" color="0xFF000022" translation="[-248, -123]" />
+            
+            <!-- Error icon -->
+            <Label text="!" 
+                   font="font:VeryLargeBoldSystemFont" 
+                   color="0xFF3333FF" 
+                   translation="[0, -40]" 
+                   horizAlign="center" />
+            
+            <!-- Error message -->
+            <Label id="errorMessage" 
+                   text="Connection failed" 
+                   font="font:LargeBoldSystemFont" 
+                   color="0xFFFFFFFF" 
+                   translation="[0, 20]" 
+                   horizAlign="center" />
+            
+            <Label text="Press OK to try again" 
+                   font="font:MediumSystemFont" 
+                   color="0xCCCCCCFF" 
+                   translation="[0, 60]" 
+                   horizAlign="center" />
+        </Group>
+    </children>
+</component>

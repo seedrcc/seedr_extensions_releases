@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="AudioPlayer" extends="Group">
+    <interface>
+        <field id="audioContent" type="assocarray" />
+        <field id="fileName" type="string" />
+        <field id="albumArt" type="string" />
+        <field id="artist" type="string" value="Seedr" />
+        <field id="album" type="string" value="My Files" />
+        <field id="duration" type="integer" value="248" />
+        <field id="isPlaying" type="boolean" value="true" />
+        <field id="currentTime" type="integer" value="0" />
+        <field id="onBackPressed" type="boolean" value="false" />
+    </interface>
+
+    <children>
+        <!-- Background - Dark teal like Kodi -->
+        <Rectangle id="background" width="1280" height="720" color="0x0F2027FF" />
+        
+        <!-- Gradient overlay for depth -->
+        <Rectangle id="gradientOverlay" width="1280" height="720" color="0x203A4300" />
+        
+        <!-- Header section -->
+        <Label id="nowPlayingLabel" 
+               text="Now playing..." 
+               translation="[80, 30]" 
+               font="font:MediumBoldSystemFont" 
+               color="0xFFFFFFFF" />
+        
+        <Label id="trackCountLabel" 
+               text="Track 1 / 1" 
+               translation="[80, 60]" 
+               font="font:SmallSystemFont" 
+               color="0xCCCCCCFF" />
+        
+        <!-- Time display (top right) -->
+        <Label id="timeLabel" 
+               text="12:55 PM" 
+               translation="[1180, 30]" 
+               font="font:SmallSystemFont" 
+               color="0xBBBBBBFF" 
+               horizAlign="right" />
+        
+        <!-- Large album art section like Kodi -->
+        <Rectangle id="albumArtBackground" 
+                   translation="[80, 120]" 
+                   width="300" 
+                   height="300" 
+                   color="0x1A1A1AFF" />
+        
+        <Poster id="albumArtPoster" 
+                translation="[80, 120]" 
+                width="300" 
+                height="300" 
+                visible="false" />
+        
+        <!-- Default large music icon when no album art -->
+        <Group id="musicIconGroup" translation="[80, 120]">
+            <!-- Large music note icon like Kodi -->
+            <Rectangle translation="[120, 120]" width="120" height="120" color="0x333333FF" />
+            <Label translation="[160, 160]" text="♫" font="font:VeryLargeSystemFont" color="0xFFFFFFFF" />
+        </Group>
+        
+        <!-- Track information - positioned like Kodi -->
+        <Label id="trackTitleLabel" 
+               translation="[420, 200]" 
+               font="font:VeryLargeSystemFont" 
+               color="0xFFFFFFFF" 
+               width="800" />
+        
+        <Label id="artistLabel" 
+               translation="[420, 260]" 
+               font="font:LargeSystemFont" 
+               color="0xCCCCCCFF" 
+               width="800" />
+        
+        <Label id="albumLabel" 
+               translation="[420, 300]" 
+               font="font:MediumSystemFont" 
+               color="0x999999FF" 
+               width="800" />
+        
+        
+        <!-- Progress bar section - bottom like Kodi -->
+        <Rectangle id="progressBackground" 
+                   translation="[40, 600]" 
+                   width="1200" 
+                   height="8" 
+                   color="0x555555FF" />
+        
+        <Rectangle id="progressFill" 
+                   translation="[40, 600]" 
+                   width="0" 
+                   height="8" 
+                   color="0x00AAFFFF" />
+        
+        <!-- Time display - centered below progress -->
+        <Label id="progressTimeLabel" 
+               translation="[600, 620]" 
+               font="font:LargeSystemFont" 
+               color="0xFFFFFFFF" 
+               text="00:00 / 04:08" 
+               horizAlign="center" />
+        
+        <!-- Control bar (like Kodi) -->
+        <Rectangle id="controlBarBackground" 
+                   translation="[0, 620]" 
+                   width="1280" 
+                   height="100" 
+                   color="0x1A1A1AFF" />
+        
+        <!-- Control buttons - bottom row like Kodi -->
+        <Group id="controlButtonsGroup" translation="[400, 660]">
+            <!-- Previous button -->
+            <Rectangle id="prevButton" translation="[0, 0]" width="50" height="40" color="0x444444FF" />
+            <Label id="prevLabel" translation="[10, 8]" text="⏮" font="font:LargeSystemFont" color="0xFFFFFFFF" />
+            
+            <!-- Play/Pause button -->
+            <Rectangle id="playButton" translation="[70, 0]" width="50" height="40" color="0x0099CCFF" />
+            <Label id="playLabel" translation="[85, 8]" text="⏸" font="font:LargeSystemFont" color="0xFFFFFFFF" />
+            
+            <!-- Stop button -->
+            <Rectangle id="stopButton" translation="[140, 0]" width="50" height="40" color="0x444444FF" />
+            <Label id="stopLabel" translation="[155, 8]" text="⏹" font="font:LargeSystemFont" color="0xFFFFFFFF" />
+            
+            <!-- Next button -->
+            <Rectangle id="nextButton" translation="[210, 0]" width="50" height="40" color="0x444444FF" />
+            <Label id="nextLabel" translation="[225, 8]" text="⏭" font="font:LargeSystemFont" color="0xFFFFFFFF" />
+        </Group>
+        
+        <!-- Right side controls - simplified like Kodi -->
+        <Group id="rightControlsGroup" translation="[800, 660]">
+            <!-- Shuffle button -->
+            <Rectangle id="shuffleButton" translation="[0, 0]" width="50" height="40" color="0x444444FF" />
+            <Label id="shuffleLabel" translation="[15, 8]" text="🔀" font="font:MediumSystemFont" color="0xFFFFFFFF" />
+            
+            <!-- Repeat button -->
+            <Rectangle id="repeatButton" translation="[70, 0]" width="50" height="40" color="0x444444FF" />
+            <Label id="repeatLabel" translation="[85, 8]" text="🔁" font="font:MediumSystemFont" color="0xFFFFFFFF" />
+            
+            <!-- Settings button -->
+            <Rectangle id="settingsButton" translation="[140, 0]" width="50" height="40" color="0x444444FF" />
+            <Label id="settingsLabel" translation="[155, 8]" text="⚙" font="font:MediumSystemFont" color="0xFFFFFFFF" />
+        </Group>
+        
+    </children>
+    
+    <script type="text/brightscript" uri="AudioPlayer.brs" />
+</component>

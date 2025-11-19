@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<component name="Detail" extends="Group" initialFocus="Buttons"  >
+    <script type="text/brightscript" uri="Detail.brs" />
+    <interface>
+        <field id="content" type="node" onChange="OnContentChange" />
+        <field id="jumpToItem" type="integer" onChange="OnJumpToItem" value="0" alwaysNotify="true" />
+        <field id="itemFocused" type="integer" alwaysNotify="true" />     
+        <field id="buttonSelected" type="integer" alias="buttons.itemSelected" />
+        <field id="buttons" type="node" alias="buttons.content" />
+    </interface>
+    <children>
+      <Poster id="poster" opacity="0.3" width="1450" height="700" />
+        <LayoutGroup translation="[1166, 154]" layoutDirection="horiz"  horizAlignment="right" itemSpacings="[40]">
+            <LayoutGroup  itemSpacings="[14, 10]" layoutDirection="vert">
+                <Label id="titleLabel" width="357" wrap="false" horizAlign="right" />
+            </LayoutGroup>
+            <Group>
+                <LabelList id="buttons" numRows="3" itemSpacing="[0,10]" itemSize="[593, 48]"/>
+                <LayoutGroup itemSpacings="[40]" translation="[0, 208]">
+                    <Label id="descriptionLabel" wrap="true" maxLines="6" width="593" />
+                </LayoutGroup>
+            </Group>
+        </LayoutGroup>
+    </children>
+</component>

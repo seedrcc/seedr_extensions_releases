@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<component name="SeedrHomeScene" extends="Group">
+  <script type="text/brightscript" uri="pkg:/source/utils.brs" />
+  <script type="text/brightscript" uri="pkg:/source/api.brs" />
+  <script type="text/brightscript" uri="pkg:/source/auth.brs" />
+  <script type="text/brightscript" uri="SeedrHomeScene.brs"/>
+  
+  <interface>
+    <field id="loadData" type="boolean" />
+    
+    <!-- DetailScreen integration - NEW ADDITION -->
+    <field id="showDetailScreen" type="boolean" alwaysNotify="true" />
+    <field id="detailScreenContent" type="node" />
+    <field id="detailScreenIndex" type="integer" />
+    
+    <!-- Back navigation control fields -->
+    <field id="skipAutoRestore" type="boolean" />
+    <field id="currentFolderId" type="string" />
+    
+    <!-- Home button trigger field -->
+    <field id="loadRootFolder" type="boolean" alwaysNotify="true" />
+  </interface>
+
+  <children>
+    <Label
+      text="Seedr Files"
+      translation="[40,30]"
+      color="0x8DFDFFFF"
+      font="font:LargeBoldSystemFont" />
+    
+    <!-- Dynamic title that changes based on selected category -->
+    <Label
+      id="categoryTitle"
+      text="All Files"
+      translation="[300,60]"
+      color="0xFFFFFFFF"
+      font="font:LargeSystemFont" />
+      
+    <!-- Now Playing tile (top right) -->
+
+
+
+    <Group id="nowPlayingTile" translation="[800,30]" visible="false">
+      <Rectangle 
+        id="nowPlayingBackground"
+        color="0x1A1A1AFF"
+        width="480"
+        height="80" />
+      <Rectangle 
+        id="nowPlayingBorder"
+        color="0x00ADEFFF"
+        width="480"
+        height="2" />
+      <Rectangle 
+        id="nowPlayingBorder2"
+        color="0x00ADEFFF"
+        width="2"
+        height="80" />
+      <Rectangle 
+        id="nowPlayingBorder3"
+        color="0x00ADEFFF"
+        width="480"
+        height="2"
+        translation="[0,78]" />
+      <Rectangle 
+        id="nowPlayingBorder4"
+        color="0x00ADEFFF"
+        width="2"
+        height="80"
+        translation="[478,0]" />
+      <Label
+        id="nowPlayingLabel"
+        text="Now Playing"
+        translation="[10,10]"
+        color="0x00ADEFFF"
+        font="font:SmallBoldSystemFont" />
+      <Label
+        id="nowPlayingTitle"
+        text=""
+        translation="[10,35]"
+        color="0xFFFFFFFF"
+        font="font:SmallSystemFont"
+        width="460" />
+      <Label
+        id="nowPlayingInfo"
+        text=""
+        translation="[10,55]"
+        color="0xCCCCCCFF"
+        font="font:SmallestSystemFont"
+        width="460" />
+    </Group>
+
+    <ButtonGroup
+      id="button_group_1"
+      translation="[20,120]">
+        <Button text="Home"/>
+        <Button text="Folders"/>
+        <Button text="Videos"/>
+        <Button text="Audio"/>
+        <Button text="Images"/>
+        <Button text="Settings"/>
+    </ButtonGroup>
+
+    <RowList 
+      id="row_list_1" 
+      translation="[350,120]"
+      itemComponentName="SeedrFileItem" 
+      numRows="3" 
+      itemSize="[1000, 220]" 
+      rowItemSize="[[300, 200]]"
+      rowItemSpacing="[[20,0]]"
+      showRowLabel="[true]" 
+      drawFocusFeedback="true" 
+      rowLabelOffset="[[0,20]]"
+      vertFocusAnimationStyle="fixedFocusWrap" 
+      rowFocusAnimationStyle="fixedFocusWrap" />
+    
+    <!-- White borders below each row (only visible on home screen) -->
+    <Group id="rowBorders" visible="true">
+      <!-- These will be dynamically created in BrightScript -->
+    </Group>
+
+    <!-- Account/Settings Panel (shown in content area when Settings is selected) -->
+    <Group id="subscriptionPanel" translation="[280,120]" visible="false">
+      <!-- Main Background Panel -->
+      <Rectangle
+        width="980"
+        height="900"
+        color="0x1a1a1aFF">
+        <!-- Top Border -->
+        <Rectangle
+          width="980"
+          height="4"
+          color="0x1DB954FF" />
+      </Rectangle>
+      
+      <!-- Account Section Container -->
+      <Rectangle
+        translation="[5, 15]"
+        width="970"
+        height="110"
+        color="0x2a2a2aFF">
+        <!-- Section Border -->
+        <Rectangle
+          width="970"
+          height="2"
+          color="0x404040FF" />
+        <Rectangle
+          translation="[0, 108]"
+          width="970"
+          height="2"
+          color="0x404040FF" />
+      </Rectangle>
+      
+      <!-- User Email -->
+      <Label
+        id="subUserEmail"
+        translation="[20, 30]"
+        width="930"
+        height="35"
+        text="Loading..."
+        font="font:MediumBoldSystemFont"
+        color="0xFFFFFFFF"
+        horizAlign="left"
+        vertAlign="center" />
+      
+      <!-- Premium Status Badge -->
+      <Rectangle
+        id="subPremiumBadge"
+        translation="[20, 75]"
+        width="160"
+        height="40"
+        color="0x888888FF">
+        <Label
+          id="subPremiumStatusLabel"
+          width="160"
+          height="40"
+          text="Free"
+          font="font:MediumBoldSystemFont"
+          color="0xFFFFFFFF"
+          horizAlign="center"
+          vertAlign="center" />
+      </Rectangle>
+      
+      <!-- Storage Section Container -->
+      <Rectangle
+        translation="[5, 135]"
+        width="970"
+        height="150"
+        color="0x2a2a2aFF">
+        <Rectangle
+          width="970"
+          height="2"
+          color="0x404040FF" />
+        <Rectangle
+          translation="[0, 148]"
+          width="970"
+          height="2"
+          color="0x404040FF" />
+      </Rectangle>
+      
+      <!-- Storage Header -->
+      <Label
+        translation="[20, 145]"
+        width="150"
+        height="35"
+        text="Storage"
+        font="font:LargeBoldSystemFont"
+        color="0x1DB954FF"
+        horizAlign="left"
+        vertAlign="center" />
+      
+      <!-- Storage Details in a Row -->
+      <Label
+        id="subStorageUsed"
+        translation="[20, 185]"
+        width="250"
+        height="30"
+        text="Used: 0 GB"
+        font="font:MediumSystemFont"
+        color="0xFFFFFFFF"
+        horizAlign="left"
+        vertAlign="center" />
+      
+      <Label
+        id="subStorageLimit"
+        translation="[290, 185]"
+        width="250"
+        height="30"
+        text="Total: 0 GB"
+        font="font:MediumSystemFont"
+        color="0xCCCCCCFF"
+        horizAlign="left"
+        vertAlign="center" />
+      
+      <!-- Storage Percentage -->
+      <Label
+        id="subStoragePercentage"
+        translation="[560, 185]"
+        width="120"
+        height="30"
+        text="(0%)"
+        font="font:MediumSystemFont"
+        color="0xFFCC00FF"
+        horizAlign="left"
+        vertAlign="center" />
+      
+      <!-- Storage Progress Bar -->
+      <Rectangle
+        translation="[20, 225]"
+        width="930"
+        height="50"
+        color="0x222222FF">
+        <!-- Progress Fill - TEST: Shows 100px by default so you can see it works -->
+        <Rectangle
+          id="subStorageBarFill"
+          width="100"
+          height="50"
+          color="0x1DB954FF" />
+      </Rectangle>
+      
+      <!-- Features Section Container -->
+      <Rectangle
+        translation="[5, 295]"
+        width="970"
+        height="135"
+        color="0x2a2a2aFF">
+        <Rectangle
+          width="970"
+          height="2"
+          color="0x404040FF" />
+        <Rectangle
+          translation="[0, 133]"
+          width="970"
+          height="2"
+          color="0x404040FF" />
+      </Rectangle>
+      
+      <!-- Features Header -->
+      <Label
+        translation="[20, 305]"
+        width="150"
+        height="35"
+        text="Features"
+        font="font:LargeBoldSystemFont"
+        color="0x1DB954FF"
+        horizAlign="left"
+        vertAlign="center" />
+      
+      <!-- Features in Columns -->
+      <Label
+        id="subMaxTorrents"
+        translation="[20, 350]"
+        width="400"
+        height="30"
+        text="Max Torrents: 0"
+        font="font:MediumSystemFont"
+        color="0xFFFFFFFF"
+        horizAlign="left"
+        vertAlign="center" />
+      
+      <Label
+        id="subActiveTorrents"
+        translation="[440, 350]"
+        width="300"
+        height="30"
+        text="Active: 0"
+        font="font:MediumSystemFont"
+        color="0xFFFFFFFF"
+        horizAlign="left"
+        vertAlign="center" />
+      
+      <Label
+        id="subConcurrentDownloads"
+        translation="[20, 390]"
+        width="930"
+        height="30"
+        text="Concurrent Downloads: unlimited"
+        font="font:MediumSystemFont"
+        color="0xFFFFFFFF"
+        horizAlign="left"
+        vertAlign="center" />
+      
+      <!-- Action Buttons Section -->
+      <Rectangle
+        translation="[5, 440]"
+        width="970"
+        height="100"
+        color="0x2a2a2aFF">
+        <Rectangle
+          width="970"
+          height="2"
+          color="0x404040FF" />
+        <Rectangle
+          translation="[0, 98]"
+          width="970"
+          height="2"
+          color="0x404040FF" />
+      </Rectangle>
+      
+      <!-- Logout Button (Focusable) -->
+      <Group id="subViewPlansButtonGroup" translation="[20, 460]">
+        <Rectangle
+          id="subViewPlansButton"
+          width="250"
+          height="65"
+          color="0xFF4444FF">
+          <Label
+            id="subViewPlansButtonText"
+            width="250"
+            height="65"
+            text="Logout"
+            font="font:LargeBoldSystemFont"
+            color="0xFFFFFFFF"
+            horizAlign="center"
+            vertAlign="center" />
+        </Rectangle>
+        
+        <!-- Focus indicator border -->
+        <Rectangle
+          id="subViewPlansButtonBorder"
+          translation="[0, 65]"
+          width="250"
+          height="4"
+          color="0xFFFFFFFF"
+          visible="false" />
+      </Group>
+      
+      <!-- Help Text -->
+      <Label
+        translation="[290, 475]"
+        width="660"
+        height="35"
+        text="Press OK to logout and return to sign-in screen"
+        font="font:SmallSystemFont"
+        color="0x888888FF"
+        horizAlign="left"
+        vertAlign="center" />
+    </Group>
+
+    <Video id="video_1" visible="false"/>
+  </children>
+</component>

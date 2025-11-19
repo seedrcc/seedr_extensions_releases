@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--********** Seedr for Roku - Video Player **********-->
+
+<component name="VideoPlayer" extends="Group">
+    <script type="text/brightscript" uri="VideoPlayer.brs" />
+    
+    <interface>
+        <field id="playVideo" type="assocarray" />
+    </interface>
+    
+    <children>
+        <!-- Video Node -->
+        <Video id="videoNode" 
+               width="1280" 
+               height="720" 
+               translation="[0, 0]" />
+    </children>
+</component>

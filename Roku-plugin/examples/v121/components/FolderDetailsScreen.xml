@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="FolderDetailsScreen" extends="Group" initialFocus="rowList">
+    <script type="text/brightscript" uri="FolderDetailsScreen.brs" />
+    <interface>
+        <field id="content" type="node" alias="rowList.content" />
+        <field id="rowItemSelected" type="intarray" alwaysnotify="true" alias="rowList.rowItemSelected" />
+        <field id="jumpToRowItem" type="intarray" alias="rowList.jumpToRowItem" />
+        <field id="folderData" type="assocarray" />
+        
+        <!-- Play functionality -->
+        <field id="playPressed" type="boolean" alwaysNotify="true" />
+        <field id="selectedItem" type="node" />
+    </interface>
+    <children>
+        <!-- Dynamic Background Layer -->
+        <Poster 
+            id="backgroundPoster" 
+            width="1280" 
+            height="720"
+            translation="[0, 0]"
+            loadDisplayMode="scaleToFill"
+            opacity="0.4" />
+            
+        <!-- Secondary background for smooth transitions -->
+        <Poster 
+            id="backgroundPosterSecondary" 
+            width="1280" 
+            height="720"
+            translation="[0, 0]"
+            loadDisplayMode="scaleToFill"
+            opacity="0.0" />
+            
+        <!-- Dark overlay for text readability -->
+        <Rectangle
+            width="1280"
+            height="720"
+            color="0x000000"
+            opacity="0.3"
+            translation="[0, 0]" />
+        
+        <!-- Left side content info panel - adjusted to prevent overlap -->
+        <Group id="infoPanel" translation="[40,80]">
+            <!-- File preview poster -->
+            <Poster id="poster" 
+                width="160" 
+                height="90" 
+                translation="[0,0]"
+                loadDisplayMode="scaleToFit" />
+                
+            <!-- File information -->
+            <Label id="titleLabel" 
+                width="400" 
+                height="60"
+                translation="[0,100]" 
+                font="font:LargeBoldSystemFont" 
+                color="0xFFFFFF" 
+                wrap="true"
+                maxLines="2" />
+                
+            <Label id="fileTypeLabel" 
+                width="150" 
+                translation="[0,170]" 
+                font="font:MediumBoldSystemFont" 
+                color="0xFFFFFF" />
+                
+            <Label id="fileSizeLabel" 
+                width="150" 
+                translation="[160,170]" 
+                font="font:MediumSystemFont" 
+                color="0xCCCCCC" />
+                
+            <Label id="descriptionLabel" 
+                wrap="true" 
+                width="400" 
+                height="40"
+                numLines="2" 
+                translation="[0,200]" 
+                font="font:MediumSystemFont" 
+                color="0xEEEEEE" />
+                
+            <Label id="folderInfoLabel" 
+                width="400" 
+                translation="[0,250]" 
+                font="font:SmallBoldSystemFont" 
+                color="0xDDDDDD" />
+        </Group>
+        
+        <!-- Grid for folder contents - adjusted position to prevent overlap -->
+        <RowList 
+            showRowCounter="[true]"  
+            itemComponentName="SeedrFileItem" 
+            id="rowList" 
+            translation="[480,180]"  
+            numRows="2" 
+            rowitemSize="[[280,160]]" 
+            rowItemSpacing="[[25,20]]" 
+            itemSize="[760,340]" 
+            rowLabelOffset="[[0,0]]" 
+            focusXOffset="[40]" 
+            showRowLabel="[false]" 
+            rowFocusAnimationStyle="floatingfocus" />
+            
+        <!-- Navigation Instructions -->
+        <Label
+            text=" •  OK Play/Open  •  Back Return"
+            font="font:SmallSystemFont"
+            color="0xAAAAA"
+            width="1280"
+            height="30"
+            horizAlign="center"
+            translation="[0, 690]" />
+    </children>
+</component>

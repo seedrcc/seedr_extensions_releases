@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="RowListComponent" extends="Group">
+    <interface>
+      <field id="itemContent" type="node" onChange="OnContentSet" />
+    </interface>
+    <script type="text/brightscript" uri="RowListComponent.brs" />
+    <children>
+        <Poster id="poster" loadDisplayMode="scaleToFit" width="320" height="180" loadWidth="320" loadHeight="180"/>
+               <Label id="bottomTitle" width="280" height="50" wrap="true" translation="[20,150]">
+        </Label>
+    </children>
+</component>

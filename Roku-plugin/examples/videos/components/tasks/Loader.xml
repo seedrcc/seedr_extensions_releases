@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="Loader" extends="Task">
+    <interface>
+        <field id="content" type="node" />
+    </interface>
+    <script type="text/brightscript" uri="Loader.brs" />
+</component>
