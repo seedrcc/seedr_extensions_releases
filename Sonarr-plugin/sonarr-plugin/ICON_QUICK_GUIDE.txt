@@ -1,0 +1,115 @@
+================================================================================
+  HOW TO ADD SEEDR ICON TO YOUR APPLICATION
+================================================================================
+
+YES! It's possible and I've already set it up for you! ✓
+
+WHAT WAS DONE:
+--------------
+✓ Updated sonarr_seedr.spec to use custom icon
+✓ Created ICON_SETUP.md - Complete guide
+✓ Created create_icon.py - Python script to convert images
+✓ Created create_icon.bat - Easy Windows script
+✓ Updated build.bat - Includes new documentation
+
+
+HOW TO ADD YOUR ICON (3 EASY WAYS):
+------------------------------------
+
+METHOD 1: Use Online Converter (Easiest!)
+-----------------------------------------
+1. Go to: https://convertio.co/png-ico/
+2. Upload Seedr logo (get it from seedr.cc website)
+3. Download the .ico file
+4. Rename it to: seedr_icon.ico
+5. Place in project folder (same folder as build.bat)
+6. Run: build.bat
+   ✓ Your exe will now have the Seedr icon!
+
+
+METHOD 2: Use Python Script (If you have Python)
+------------------------------------------------
+1. Save Seedr logo as seedr_logo.png (or .jpg)
+2. Double-click: create_icon.bat
+3. Enter the path to your logo image
+4. Script creates seedr_icon.ico automatically
+5. Run: build.bat
+   ✓ Done!
+
+
+METHOD 3: Manual Python Command
+-------------------------------
+If you prefer command line:
+  python create_icon.py path/to/seedr_logo.png
+
+This creates seedr_icon.ico automatically.
+
+
+WHAT YOU NEED:
+--------------
+1. Seedr logo image (PNG, JPG, or any format)
+   - Download from: https://www.seedr.cc
+   - Right-click their logo → Save image
+
+2. Convert to .ico format (use Method 1, 2, or 3 above)
+
+3. Place seedr_icon.ico in project root folder:
+   D:\New folder (3)\New folder (5)\Seedr Plugins\sonarr-fast-API-plugin\
+
+
+THEN BUILD:
+-----------
+  build.bat
+
+The new executable will have your custom Seedr icon! 🎨
+
+
+TROUBLESHOOTING:
+----------------
+"Icon file not found" error?
+  → Make sure seedr_icon.ico is in the SAME folder as build.bat
+
+Icon doesn't show after building?
+  → Windows caches icons - restart Windows Explorer or reboot
+  → Right-click EXE → Properties to verify icon is there
+
+Can't convert image to .ico?
+  → Use online converter: https://convertio.co/png-ico/
+  → Or try: https://www.icoconverter.com/
+
+
+WHERE YOU'LL SEE THE ICON:
+---------------------------
+✓ Desktop shortcut
+✓ Taskbar when running
+✓ File Explorer
+✓ Alt+Tab window switcher
+✓ Task Manager
+✓ Start Menu (if pinned)
+
+
+ICON REQUIREMENTS:
+------------------
+- Format: .ico (Windows icon)
+- Name: seedr_icon.ico
+- Location: Project root folder
+- Size: Multiple sizes included (16x16 to 256x256)
+  → Most converters do this automatically!
+
+
+DETAILED HELP:
+--------------
+See ICON_SETUP.md for complete instructions and troubleshooting.
+
+
+QUICK SUMMARY:
+--------------
+1. Get Seedr logo from seedr.cc
+2. Convert to .ico using online tool
+3. Save as seedr_icon.ico in project folder
+4. Run build.bat
+5. Enjoy your custom icon! 🚀
+
+
+================================================================================
+

@@ -1,0 +1,224 @@
+================================================================================
+                    AUTOMATED RELEASE - QUICK START
+================================================================================
+
+🚀 ONE COMMAND TO RELEASE EVERYTHING!
+
+================================================================================
+                           FIRST TIME SETUP
+================================================================================
+
+STEP 1: Install GitHub CLI
+---------------------------
+Download from: https://cli.github.com/
+OR run: winget install --id GitHub.cli
+
+
+STEP 2: Login to GitHub
+---------------------------
+Run: gh auth login
+Follow prompts to authenticate
+
+
+STEP 3: Test
+---------------------------
+Run: gh auth status
+Should show: "Logged in to github.com as jose987654"
+
+
+================================================================================
+                         HOW TO RELEASE
+================================================================================
+
+1. Make sure all your changes are committed
+2. Run: release.bat
+3. Follow the prompts:
+   - Choose version type (Major/Minor/Patch)
+   - Enter release notes (what's new)
+   - Script does everything else automatically!
+
+THAT'S IT! 🎉
+
+
+================================================================================
+                         WHAT THE SCRIPT DOES
+================================================================================
+
+✅ Updates version.py
+✅ Runs build.bat (creates executable)
+✅ Commits changes to git
+✅ Creates git tag (v1.2.0)
+✅ Pushes to GitHub
+✅ Creates GitHub release
+✅ Uploads ZIP file
+✅ Adds release notes
+✅ Users can now auto-update!
+
+
+================================================================================
+                           VERSION TYPES
+================================================================================
+
+1. MAJOR (1.0.0 -> 2.0.0)
+   - Breaking changes
+   - Major rewrites
+
+2. MINOR (1.1.0 -> 1.2.0)
+   - New features
+   - Improvements
+   - Most common!
+
+3. PATCH (1.1.0 -> 1.1.1)
+   - Bug fixes
+   - Small updates
+
+4. CUSTOM
+   - Any version you want
+
+
+================================================================================
+                          EXAMPLE USAGE
+================================================================================
+
+> release.bat
+
+[1/6] Reading version information...
+  Current Version: v1.1.0
+
+[2/6] What type of release is this?
+  1. Major
+  2. Minor
+  3. Patch
+  4. Use current
+  5. Custom
+
+Enter choice: 2
+
+  New Version: v1.2.0
+
+[3/6] Updating version.py...
+  Updated!
+
+[4/6] Enter release notes:
+  - Added auto-update feature
+  - Fixed download bugs
+  - Improved performance
+  - done
+
+[5/6] Running build...
+  [Building...]
+  Build complete!
+
+[6/6] Creating GitHub release...
+  Committed!
+  Tagged!
+  Pushed!
+  Release created!
+
+SUCCESS! Release published at:
+https://github.com/jose987654/sonarr-plugin/releases/tag/v1.2.0
+
+Users can now update with one click!
+
+
+================================================================================
+                          TROUBLESHOOTING
+================================================================================
+
+Problem: "GitHub CLI not found"
+Solution: Install GitHub CLI and restart terminal
+
+Problem: "Not authenticated"
+Solution: Run: gh auth login
+
+Problem: "Tag already exists"
+Solution: Delete tag and try again:
+  git tag -d v1.2.0
+  git push origin :refs/tags/v1.2.0
+
+Problem: "Build failed"
+Solution: Run build.bat manually to see errors
+
+
+================================================================================
+                         USEFUL COMMANDS
+================================================================================
+
+# Check authentication
+gh auth status
+
+# List releases
+gh release list
+
+# View a release
+gh release view v1.2.0
+
+# Delete a release
+gh release delete v1.2.0
+
+# Manual release (if script fails)
+gh release create v1.2.0 releases\YourFile.zip --title "Version 1.2.0"
+
+
+================================================================================
+                         WHAT USERS SEE
+================================================================================
+
+After you release:
+
+1. User opens app -> Settings page
+2. Clicks "Check for Updates"
+3. Sees: "New version available! 1.1.0 -> 1.2.0"
+4. Clicks "Download & Install"
+5. App updates automatically!
+6. Settings preserved! ✅
+
+
+================================================================================
+                            QUICK TIPS
+================================================================================
+
+✅ Test your build locally before releasing
+✅ Write clear release notes for users
+✅ Use Minor version for new features
+✅ Use Patch version for bug fixes
+✅ Commit all changes before running script
+✅ Users love the auto-update feature!
+
+
+================================================================================
+                            TIME SAVED
+================================================================================
+
+WITHOUT SCRIPT:
+- Update version.py manually
+- Run build.bat
+- Commit and push
+- Go to GitHub website
+- Create release
+- Upload ZIP
+- Write notes
+- Publish
+⏰ Time: 10-15 minutes
+
+WITH SCRIPT:
+- Run: release.bat
+⚡ Time: 2-3 minutes
+
+SAVED: 8-12 minutes per release! 🎉
+
+
+================================================================================
+                           NEED MORE HELP?
+================================================================================
+
+Read the full guide: RELEASE_SCRIPT_SETUP.md
+
+Your repository: https://github.com/jose987654/sonarr-plugin
+Create release: https://github.com/jose987654/sonarr-plugin/releases/new
+
+
+================================================================================
+
+🎊 You're ready to automate your releases! 🚀
+

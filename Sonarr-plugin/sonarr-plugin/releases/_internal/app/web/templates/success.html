@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Complete - Sonarr-Seedr Integration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        .success-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 3rem;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .seedr-logo-img {
+            height: 60px;
+            width: auto;
+            margin-bottom: 1rem;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: #1a202c;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .success-message {
+            background: #c6f6d5;
+            border: 2px solid #48bb78;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .success-message h2 {
+            color: #22543d;
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .success-message p {
+            color: #276749;
+            font-size: 1rem;
+        }
+
+        .info-card {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card h3 {
+            color: #2d3748;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .info-card p {
+            color: #4a5568;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-card span {
+            color: #3182ce;
+            font-weight: 700;
+            font-family: monospace;
+        }
+
+        .next-steps {
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .next-steps h3 {
+            color: #2c5282;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .next-steps ol {
+            color: #2c5282;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .next-steps li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+
+        .next-steps pre {
+            background: #2d3748;
+            color: #48bb78;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            overflow-x: auto;
+        }
+
+        .next-steps code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+
+        .footer-text {
+            text-align: center;
+            color: #718096;
+            font-size: 0.95rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .success-container {
+                padding: 2rem;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="success-container">
+        <div class="logo-section">
+            <img src="../static/images/icon.png" alt="Seedr Logo" class="seedr-logo-img">
+            <div class="success-icon">✅</div>
+        </div>
+
+        <h1>Setup Complete!</h1>
+
+        <div class="success-message">
+            <h2>🎉 Configuration Saved Successfully</h2>
+            <p>Your Sonarr-Seedr integration is ready to use!</p>
+        </div>
+
+        <div class="info-card">
+            <h3>📡 Server Information</h3>
+            <p>Your server is running at: <span id="serverAddress">http://localhost:8000</span></p>
+            <p>Access the dashboard at: <span id="dashboardUrl">http://localhost:8000/</span></p>
+        </div>
+
+        <div class="next-steps">
+            <h3>🚀 Next Steps</h3>
+            <ol>
+                <li>Open a terminal/command prompt</li>
+                <li>Navigate to the project directory</li>
+                <li>Run the following command to start the application:
+                    <pre><code>python run.py</code></pre>
+                </li>
+                <li>Access the dashboard to authenticate with Seedr:
+                    <pre><code>http://localhost:8000</code></pre>
+                </li>
+            </ol>
+        </div>
+
+        <p class="footer-text">Thank you for using Sonarr-Seedr Integration! 🎬📥</p>
+    </div>
+</body>
+
+</html>
