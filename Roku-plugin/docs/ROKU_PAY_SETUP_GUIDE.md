@@ -1,498 +1,360 @@
-# Roku Pay Setup Guide for Seedr
+# Roku Pay Integration - Complete Setup Guide
 
-## 🎯 Quick Start
-
-This guide will help you set up Roku Pay (in-channel purchasing) for your Seedr Roku app. The integration code is already complete - you just need to configure products in the Roku Developer Portal.
+This guide will walk you through setting up Roku Pay (Channel Store) for your Seedr subscription app on Roku.
 
 ---
 
-## 📋 Prerequisites
+## 📋 Table of Contents
+
+1. [Prerequisites](#prerequisites)
+2. [Roku Developer Dashboard Setup](#roku-developer-dashboard-setup)
+3. [Creating Products](#creating-products)
+4. [Testing with Test Users](#testing-with-test-users)
+5. [Updating Product IDs in Code](#updating-product-ids-in-code)
+6. [Testing the Integration](#testing-the-integration)
+7. [Publishing & Going Live](#publishing--going-live)
+8. [Troubleshooting](#troubleshooting)
+
+---
+
+## 1. Prerequisites
 
 Before starting, ensure you have:
 
-- ✅ Roku Developer Account ([developer.roku.com](https://developer.roku.com))
-- ✅ Your Seedr channel published or in development
-- ✅ Tax information submitted to Roku (required for monetization)
-- ✅ Banking information for payouts
+✅ **Roku Developer Account** - Sign up at https://developer.roku.com
+✅ **Roku Device** (for testing) - Or use the Roku Simulator
+✅ **Your App Published** - At least in development mode
+✅ **Payment Processor Account** - Roku uses their payment system
 
 ---
 
-## 🔧 Step 1: Enable In-Channel Purchasing
+## 2. Roku Developer Dashboard Setup
 
-### 1.1 Access Developer Portal
+### Step 2.1: Access Developer Dashboard
 
-1. Log in to [developer.roku.com](https://developer.roku.com)
-2. Navigate to **Manage Channels**
-3. Select your **Seedr for Roku** channel
-4. Click **Monetization** in the left sidebar
+1. Go to https://developer.roku.com
+2. Log in to your account
+3. Navigate to **"Developer Dashboard"**
 
-### 1.2 Enable Roku Pay
+### Step 2.2: Create or Select Your Channel
 
-1. Toggle **"Enable In-Channel Purchasing"** to ON
-2. Read and accept the Roku Pay terms and conditions
-3. Click **Save**
+1. Click **"Manage My Channels"**
+2. Either:
+   - Select your existing Seedr channel, OR
+   - Click **"Add Channel"** to create a new one
 
----
+### Step 2.3: Enable In-Channel Products
 
-## 💰 Step 2: Create Product Catalog
-
-### 2.1 Recommended Products
-
-Configure these products in your Roku Developer Portal:
-
-#### Product 1: Premium Monthly
-
-```
-Product Code: seedr_premium_monthly
-Product Name: Seedr Premium Monthly
-Product Type: Monthly Subscription
-Price: $3.99 USD
-Description: 50GB storage, HD streaming, no ads, 3 devices
-Free Trial: 7 days (optional but recommended)
-```
-
-#### Product 2: Premium Yearly
-
-```
-Product Code: seedr_premium_yearly
-Product Name: Seedr Premium Yearly
-Product Type: Yearly Subscription
-Price: $39.99 USD (17% savings vs monthly)
-Description: 50GB storage, HD streaming, no ads, 3 devices - Best value!
-Free Trial: 7 days (optional but recommended)
-```
-
-#### Product 3: Pro Monthly (Optional)
-
-```
-Product Code: seedr_pro_monthly
-Product Name: Seedr Pro Monthly
-Product Type: Monthly Subscription
-Price: $7.99 USD
-Description: 200GB storage, 4K streaming, no ads, 5 devices, priority support
-Free Trial: 7 days (optional)
-```
-
-#### Product 4: Pro Yearly (Optional)
-
-```
-Product Code: seedr_pro_yearly
-Product Name: Seedr Pro Yearly
-Product Type: Yearly Subscription
-Price: $79.99 USD
-Description: 200GB storage, 4K streaming, no ads, 5 devices - Ultimate plan
-Free Trial: 7 days (optional)
-```
-
-### 2.2 Create Products in Portal
-
-For each product:
-
-1. In **Monetization** → **Products**, click **Add Product**
-2. Fill in the form:
-   - **Product Code**: Enter the code exactly as shown above (e.g., `seedr_premium_monthly`)
-   - **Product Name**: User-friendly name that appears in purchase dialog
-   - **Product Type**: Select "Subscription"
-   - **Subscription Duration**: Select "Monthly" or "Yearly"
-   - **Price**: Enter the price in USD
-   - **Description**: Add the product description
-3. **Optional**: Configure free trial
-   - Check "Enable Free Trial"
-   - Trial Duration: 7 days
-   - Trial Type: Time-based
-4. Click **Save**
-
-**⚠️ IMPORTANT**: Product codes must match exactly what's in the code, or purchases won't work!
-
-### 2.3 Set Up Test Products
-
-For development and testing:
-
-1. Go to **Monetization** → **Testing**
-2. Click **Create Test Products**
-3. Roku will create test versions of your products with special test pricing ($0.00)
-4. Use these during development to test the purchase flow without real money
+1. In your channel settings, find **"In-Channel Products"** or **"Monetization"**
+2. Click **"Enable In-Channel Products"**
+3. Accept Roku's Terms of Service for monetization
 
 ---
 
-## 🧪 Step 3: Testing Setup
+## 3. Creating Products
 
-### 3.1 Enable Test Mode
+You need to create products for each subscription plan and billing cycle.
 
-1. In **Monetization** → **Settings**
-2. Enable **"Test Mode"**
-3. This allows you to test purchases without real transactions
+### Step 3.1: Access Product Management
 
-### 3.2 Test on Device
+1. In your channel dashboard, click **"In-Channel Products"**
+2. Click **"Add a Product"**
 
-1. Side-load your channel to a Roku device
-2. Navigate to the subscription screen in the app
-3. Select a plan and initiate purchase
-4. Roku will show a test purchase dialog
-5. Complete the test purchase
-6. Verify that premium features unlock
+### Step 3.2: Create Each Product
 
-### 3.3 Test Scenarios to Verify
+Create **16 products** total (8 plans × 2 billing cycles):
 
-- ✅ Successful purchase
-- ✅ Cancelled purchase
-- ✅ Purchase failure handling
-- ✅ Premium features unlock after purchase
-- ✅ Subscription status persists across app restarts
-- ✅ Multiple purchases (upgrade/downgrade)
-- ✅ Expiration handling
+#### **Basic Plan - Monthly**
 
----
+- **Product Name**: `Seedr Basic Monthly`
+- **Product Identifier**: `seedr_basic_monthly` ⚠️ IMPORTANT: Use exactly this ID
+- **Product Type**: `Monthly Subscription`
+- **Price Tier**: `$6.99` (choose appropriate tier)
+- **Description**: `50GB storage, 2 task slots, HD streaming`
+- **Trial Period**: `7 days` (optional)
 
-## 🚀 Step 4: Going Live
+#### **Basic Plan - Yearly**
 
-### 4.1 Pre-Launch Checklist
+- **Product Name**: `Seedr Basic Yearly`
+- **Product Identifier**: `seedr_basic_yearly`
+- **Product Type**: `Yearly Subscription`
+- **Price Tier**: `$69.00`
+- **Description**: `50GB storage, 2 task slots, HD streaming - Save $13.90/year`
+- **Trial Period**: `7 days` (optional)
 
-- [ ] All products created with correct codes
-- [ ] Product descriptions are accurate and compelling
-- [ ] Free trial configured (if offering)
-- [ ] Test mode disabled
-- [ ] Tax and banking information verified
-- [ ] Privacy policy updated to mention subscriptions
-- [ ] Terms of service updated for billing
-- [ ] Support email/contact set up for billing questions
+#### **Pro Plan - Monthly**
 
-### 4.2 Enable Live Purchases
+- **Product Name**: `Seedr Pro Monthly`
+- **Product Identifier**: `seedr_pro_monthly`
+- **Product Type**: `Monthly Subscription`
+- **Price Tier**: `$11.99`
+- **Description**: `150GB storage, 8 task slots, Full-HD streaming, Private trackers`
 
-1. Disable **Test Mode** in Developer Portal
-2. Set channel to **Published** or **Beta** status
-3. Submit channel for certification (if not already published)
-4. Wait for Roku approval (typically 3-7 business days)
+#### **Pro Plan - Yearly**
 
-### 4.3 Monitor Launch
+- **Product Name**: `Seedr Pro Yearly`
+- **Product Identifier**: `seedr_pro_yearly`
+- **Product Type**: `Yearly Subscription`
+- **Price Tier**: `$99.00`
+- **Description**: `150GB storage, 8 task slots, Full-HD streaming - Save $19.90/year`
 
-After going live:
+#### **Master Plan - Monthly**
 
-1. Check **Analytics** in Developer Portal
-2. Monitor conversion rates
-3. Watch for support inquiries
-4. Track revenue in **Reports** section
+- **Product Name**: `Seedr Master Monthly`
+- **Product Identifier**: `seedr_master_monthly`
+- **Product Type**: `Monthly Subscription`
+- **Price Tier**: `$18.99`
+- **Description**: `1TB storage, 25 task slots, 4K streaming, WebDAV mount`
 
----
+#### **Master Plan - Yearly**
 
-## 📊 Step 5: Product Configuration Best Practices
+- **Product Name**: `Seedr Master Yearly`
+- **Product Identifier**: `seedr_master_yearly`
+- **Product Type**: `Yearly Subscription`
+- **Price Tier**: `$199.00`
+- **Description**: `1TB storage, 25 task slots, 4K streaming - Save $39.90/year`
 
-### 5.1 Pricing Strategy
+#### **Gold Plans (Repeat for Gold 1, 2, 3, 4)**
 
-**Recommended Approach:**
+Follow the same pattern for:
 
-- **Free Tier**: Always available, limited features (5GB storage, SD quality, ads)
-- **Premium Tier**: Most popular, good value ($3.99/mo or $39.99/yr)
-- **Pro Tier** (Optional): For power users ($7.99/mo or $79.99/yr)
+- `seedr_gold1_monthly` / `seedr_gold1_yearly`
+- `seedr_gold2_monthly` / `seedr_gold2_yearly`
+- `seedr_gold3_monthly` / `seedr_gold3_yearly`
+- `seedr_gold4_monthly` / `seedr_gold4_yearly`
 
-**Psychological Pricing:**
+### Step 3.3: Set Up Product Images
 
-- Use `.99` endings ($3.99 vs $4.00)
-- Show annual savings prominently ("Save 17%!")
-- Offer 7-day free trial to reduce friction
+For each product, upload:
 
-### 5.2 Product Descriptions
-
-Write clear, benefit-focused descriptions:
-
-❌ **Bad**: "Premium subscription with more storage"
-
-✅ **Good**: "Get 50GB of cloud storage, HD streaming, ad-free experience, and use on up to 3 devices"
-
-### 5.3 Free Trial Strategy
-
-**Benefits of offering trials:**
-
-- Lower barrier to entry
-- Users experience premium features
-- Higher conversion rates after trial
-- Industry standard practice
-
-**Recommended:**
-
-- 7 days for monthly plans
-- Consider no trial for yearly (already discounted)
+- **Product Icon**: 290×218 pixels (PNG)
+- **HD Promo Image**: 1920×1080 pixels (optional, for promotions)
 
 ---
 
-## 🔗 Step 6: Update Code (If Needed)
+## 4. Testing with Test Users
 
-The integration is already complete, but if you need to modify product IDs:
+### Step 4.1: Enable Test Mode
 
-### 6.1 Update Product IDs
+1. In Developer Dashboard, go to **"In-Channel Products"**
+2. Find **"Test Users"** section
+3. Add test user email addresses
+4. Enable **"Test Mode"** for your channel
 
-If you use different product codes, update these files:
+### Step 4.2: Test Purchases
 
-**File**: `components/PurchaseHandler.brs`
+Test users can:
+
+- ✅ Make purchases without being charged
+- ✅ Test subscription flows
+- ✅ Test cancellation flows
+- ✅ See how purchases appear in the app
+
+**Important**: Test purchases don't actually charge money!
+
+---
+
+## 5. Updating Product IDs in Code
+
+### Step 5.1: Update PlanConfig.brs
+
+Open `components/PlanConfig.brs` and update product IDs:
 
 ```brightscript
-' Around line 158 - update this list:
-productIdsToCheck = [
-    "seedr_premium_yearly"    ' Change to your product code
-    "seedr_premium_monthly"   ' Change to your product code
-    "seedr_pro_yearly"        ' Change to your product code
-    "seedr_pro_monthly"       ' Change to your product code
-]
-```
-
-**File**: `components/SubscriptionScreen.brs`
-
-```brightscript
-' Around line 68 - update planConfigs:
-{
-    id: "seedr_premium_monthly"  ' Change to match your product code
-    title: "Premium"
-    price: "$3.99"
-    // ... rest of config
+' Basic Plan
+basic: {
+    name: "Basic"
+    monthlyPlanId: "seedr_basic_monthly"    ' ← Your actual Roku product ID
+    yearlyPlanId: "seedr_basic_yearly"      ' ← Your actual Roku product ID
+    ' ... rest of config
 }
 ```
 
-**File**: `source/entitlements.brs`
+### Step 5.2: Verify All Product IDs Match
 
-```brightscript
-' Around line 109 - update this list:
-premiumProducts = [
-    "seedr_premium_monthly"   ' Change to your product code
-    "seedr_premium_yearly"    ' Change to your product code
-    "seedr_pro_monthly"       ' Change to your product code
-    "seedr_pro_yearly"        ' Change to your product code
-]
+Ensure **EXACT MATCH** between:
+
+- Product IDs in Roku Developer Dashboard
+- Product IDs in `PlanConfig.brs`
+
+**Common Mistake**: Typos or case sensitivity issues!
+
+---
+
+## 6. Testing the Integration
+
+### Step 6.1: Side-load Your App
+
+1. Enable Developer Mode on your Roku device:
+   - Press **Home** 3×, **Up** 2×, **Right**, **Left**, **Right**, **Left**, **Right**
+2. Note the IP address shown
+3. In browser, go to `http://[ROKU_IP]`
+4. Upload your channel package (.zip)
+
+### Step 6.2: Test Purchase Flow
+
+1. Launch your app
+2. Navigate to subscription screen
+3. Select a plan
+4. Click **"Buy Now"**
+5. Roku overlay should appear:
+   - Shows product name & price
+   - Shows payment method
+   - Confirm or Cancel buttons
+
+### Step 6.3: Verify Purchase Success
+
+After purchase:
+
+- ✅ Success dialog should appear
+- ✅ Plan card should update to "Active"
+- ✅ User should have access to premium features
+
+### Step 6.4: Check Logs
+
+Monitor logs in development console:
+
+```
+[RokuPay] Requesting product catalog...
+[RokuPay] Catalog contains 16 products
+[RokuPay] Initiating purchase for: Pro
+[RokuPay] Purchase completed successfully
 ```
 
 ---
 
-## 🎨 Step 7: Customize UI (Optional)
+## 7. Publishing & Going Live
 
-### 7.1 Update Colors
+### Step 7.1: Submit for Certification
 
-**File**: `components/SubscriptionScreen.xml`
+1. Complete all Roku certification requirements:
 
-Change the accent color from Seedr green:
+   - Privacy Policy URL
+   - Support Contact
+   - Content Rating
+   - Screenshots & descriptions
 
-```xml
-<!-- Current: Seedr green -->
-<Rectangle color="0x1DB954FF" />
+2. Submit channel for review
 
-<!-- Change to your brand color -->
-<Rectangle color="0xYOURCOLORFF" />
-```
+### Step 7.2: After Approval
 
-### 7.2 Update Product Benefits
+1. **Publish** your channel to Roku Channel Store
+2. **Disable Test Mode** in In-Channel Products
+3. **Real purchases** will now be charged
 
-**File**: `components/SubscriptionScreen.brs`
+### Step 7.3: Monitor Sales
 
-Modify the `features` array in `planConfigs`:
+Track revenue in:
 
-```brightscript
-features: [
-    "50GB Storage"          ' Update storage amount
-    "Fast Speed"            ' Change feature description
-    "No Ads"                ' Add/remove features
-    "3 Devices"             ' Update device count
-    "Email Support"         ' Change support level
-]
-```
+- **Developer Dashboard** → **Analytics**
+- **Monthly Payment Reports**
 
 ---
 
-## 📱 Step 8: Add Subscription Button to Your App
+## 8. Troubleshooting
 
-To trigger the subscription screen from your app:
-
-### 8.1 From SeedrHomeScene
-
-Add an "Upgrade" button or menu item:
-
-**File**: `components/SeedrHomeScene.brs`
-
-```brightscript
-' When user clicks upgrade button:
-sub onUpgradeButtonPressed()
-    ' Show subscription screen
-    m.top.getScene().showSubscriptionScreen = true
-end sub
-```
-
-### 8.2 From Settings Menu
-
-```brightscript
-' In your settings/menu component:
-if menuItem = "Manage Subscription" then
-    m.top.getScene().showSubscriptionScreen = true
-end if
-```
-
-### 8.3 Add Upgrade Prompts
-
-Show upgrade prompts when users try premium features:
-
-```brightscript
-' Check if feature requires premium
-if not isPremiumUser() and featureRequiresPremium then
-    ' Show upgrade prompt
-    showUpgradeDialog("This feature requires Premium")
-    m.top.getScene().showSubscriptionScreen = true
-    return
-end if
-```
-
----
-
-## 🔍 Step 9: Verification
-
-### 9.1 Check Integration
-
-Run these checks to verify everything works:
-
-1. **Products Load**:
-
-   - Launch app
-   - Check logs for: `[PurchaseHandler] ✓ Catalog loaded successfully`
-
-2. **Subscription Screen Shows**:
-
-   - Navigate to subscription screen
-   - Verify all plans display correctly
-   - Check pricing and descriptions
-
-3. **Purchase Flow**:
-
-   - Select a plan
-   - Roku Pay dialog appears
-   - Complete test purchase
-   - Check for: `[HeroMainScene] ✓✓✓ Purchase successful! ✓✓✓`
-
-4. **Entitlements Work**:
-   - After purchase, check logs for subscription status
-   - Verify premium features unlock
-   - Restart app and confirm subscription persists
-
-### 9.2 Common Issues
-
-**Issue**: Products don't load
-
-```
-[PurchaseHandler] Processing 0 catalog items...
-```
+### Issue: "Product not found" error
 
 **Solution**:
 
-- Verify In-Channel Purchasing is enabled in Developer Portal
-- Check that products are created and active
-- Ensure channel is in development/published state
+- Verify product ID matches exactly (case-sensitive)
+- Ensure products are published in Developer Dashboard
+- Wait 10-15 minutes after creating products for Roku to sync
 
----
-
-**Issue**: Purchase fails with error
-
-```
-[HeroMainScene] ✗ Purchase failed: Purchase failed. Please try again.
-```
+### Issue: Purchase overlay doesn't appear
 
 **Solution**:
 
-- Check that Test Mode is enabled (for development)
-- Verify device has internet connection
-- Ensure Roku account has payment method (for live purchases)
-- Check product codes match exactly
+- Check if `roChannelStore` is initialized
+- Verify app is packaged correctly
+- Check device internet connection
+- Review logs for errors
 
----
-
-**Issue**: Premium features don't unlock
-
-```
-[Entitlements] No active subscriptions - user is on free tier
-```
+### Issue: Products show $0.00 price
 
 **Solution**:
 
-- Check that purchase completed successfully
-- Verify `onPurchasesReady()` is called after purchase
-- Check product ID matching in `updateSubscriptionStatus()`
+- Ensure price tiers are set in Dashboard
+- Products might still be in draft mode
+- Republish products and wait for sync
+
+### Issue: "Already owned" error
+
+**Solution**:
+
+- User already owns an active subscription
+- Check `GetPurchases()` to validate
+- Implement logic to handle subscription upgrades/downgrades
+
+### Issue: Test purchases not working
+
+**Solution**:
+
+- Verify test user email is added in Dashboard
+- Ensure channel is in Test Mode
+- Sign out and sign back in on Roku device
+- Clear channel cache: Settings → System → Advanced → Factory Reset (careful!)
 
 ---
 
-## 💡 Step 10: Next Steps
-
-### 10.1 Analytics
-
-Monitor these metrics:
-
-- **Free to Paid Conversion**: Target > 2%
-- **Trial to Paid**: Target > 40%
-- **Monthly Churn**: Target < 5%
-- **MRR Growth**: Track monthly
-
-### 10.2 Optimization
-
-After launch:
-
-1. **A/B Test Pricing**: Try different price points
-2. **Test Trial Duration**: 7 days vs 14 days vs 30 days
-3. **Optimize Upgrade Prompts**: When and where to show them
-4. **Add Premium Features**: Continuously improve value proposition
-
-### 10.3 Marketing
-
-Promote your subscriptions:
-
-- **In-App**: Banners, badges on premium content
-- **Email**: Announce to existing users
-- **Social Media**: Share benefits of premium
-- **App Store**: Update description with subscription info
-
----
-
-## 📞 Support Resources
+## 📞 Support & Resources
 
 ### Official Roku Documentation
 
-- [Roku Pay Overview](https://developer.roku.com/docs/developer-program/roku-pay/how-roku-pay-works.md)
-- [ChannelStore API Reference](https://developer.roku.com/docs/references/scenegraph/control-nodes/channelstore.md)
-- [Billing Best Practices](https://developer.roku.com/docs/developer-program/roku-pay/implementation/best-practices.md)
+- [Roku Pay Developer Guide](https://developer.roku.com/docs/developer-program/roku-pay/roku-pay.md)
+- [roChannelStore API](https://developer.roku.com/docs/references/brightscript/components/rochannelstore.md)
+- [In-Channel Products FAQ](https://developer.roku.com/docs/developer-program/roku-pay/in-channel-products-faq.md)
 
-### Community
+### Roku Developer Forums
 
-- [Roku Developer Forums](https://community.roku.com)
-- Email: developer@roku.com
+- https://community.roku.com/
+
+### Contact Roku Support
+
+- Developer Support: developer@roku.com
+- Partner Success Team (for published channels)
 
 ---
 
-## ✅ Final Checklist
+## ✅ Quick Checklist
 
-Before launching subscriptions:
+Before going live, verify:
 
-- [ ] Products created in Roku Developer Portal
-- [ ] Product codes match between portal and code
+- [ ] All 16 products created in Developer Dashboard
+- [ ] Product IDs match exactly in code
 - [ ] Test purchases work correctly
-- [ ] Premium features unlock properly
-- [ ] Subscription persists across app restarts
-- [ ] Test mode disabled for live launch
-- [ ] Privacy policy updated
-- [ ] Terms of service updated
-- [ ] Support contact information added
-- [ ] Analytics tracking verified
+- [ ] Success/error dialogs display properly
+- [ ] Purchase state persists across app restarts
+- [ ] Subscription features unlock correctly
+- [ ] Privacy policy published
+- [ ] Support contact provided
 - [ ] Channel submitted for certification
-- [ ] Tax and banking information verified
+- [ ] Payment information set up in Roku account
 
 ---
 
-## 🎉 You're Ready!
+## 🎯 Next Steps
 
-Your Roku Pay integration is complete! The code handles:
-
-✅ Product catalog loading
-✅ Purchase management  
-✅ Subscription checking
-✅ Entitlement verification
-✅ Beautiful subscription screen UI
-✅ Error handling
-✅ Multiple subscription tiers
-
-All you need to do is configure products in the Roku Developer Portal and start earning revenue!
+1. **Create products** in Roku Developer Dashboard (Step 3)
+2. **Copy product IDs** to `PlanConfig.brs` (Step 5)
+3. **Test with test users** (Step 4)
+4. **Submit for certification** when ready (Step 7)
 
 ---
 
-**Questions?** Check the main integration plan: [ROKU_PAY_INTEGRATION_PLAN.md](./ROKU_PAY_INTEGRATION_PLAN.md)
+**Good luck with your Roku Pay integration! 🚀**
 
-**Good luck with your launch! 🚀**
+If you encounter issues not covered here, check the Roku forums or contact their developer support team.
+
+
+
+
+
+
+
+
+
+
+
+
+

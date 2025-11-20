@@ -19,6 +19,6 @@ echo If you saw errors above, common solutions:
 echo 1. Install Visual C++ Redistributable
 echo 2. Add folder to antivirus exclusions  
 echo 3. Run as Administrator
-echo 4. Check if port 8000 is available
+echo 4. Check if port 8242 is available
 echo.
 pause

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration - Sonarr-Seedr Integration</title>
+    <link rel="icon" type="image/x-icon" href="/static/images/icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f8f9fa;
+            color: #1a202c;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+        }
+
+        /* Top Navigation Bar */
+        .top-navbar {
+            background: linear-gradient(90deg, #4a90a4 0%, #5ba3b7 100%);
+            padding: 0 1.5rem;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+        }
+
+        .nav-logo img {
+            height: 38px;
+            width: auto;
+        }
+
+        .nav-logo-text {
+            color: white;
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-left: auto;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 0.5rem 1.25rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .logout-btn {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.35);
+            border-color: rgba(239, 68, 68, 0.6);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 60px;
+            width: 220px;
+            height: calc(100vh - 60px);
+            background: #2d3748;
+            padding: 1.5rem 0;
+            overflow-y: auto;
+        }
+
+        .nav-item {
+            padding: 0.875rem 1.75rem;
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item span {
+            font-size: 1.1rem;
+            display: inline-block;
+            width: 20px;
+            text-align: center;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+        }
+
+        .nav-item.active {
+            background: rgba(74, 144, 164, 0.25);
+            color: white;
+            border-left-color: #4a90a4;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 220px;
+            padding: 2rem;
+            min-height: calc(100vh - 60px);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: #718096;
+            margin-bottom: 2rem;
+        }
+
+        .form-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.75rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #3182ce;
+            box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+        }
+
+        .help-text {
+            font-size: 0.85rem;
+            color: #718096;
+            margin-top: 0.5rem;
+        }
+
+        .browse-btn {
+            background: #718096;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            cursor: pointer;
+            white-space: nowrap;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .browse-btn:hover {
+            background: #4a5568;
+        }
+
+        .btn-submit {
+            background: #3182ce;
+            color: white;
+            border: none;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-submit:hover {
+            background: #2c5aa0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(49, 130, 206, 0.3);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            cursor: pointer;
+        }
+
+        /* Folder Browser */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .folder-browser {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            max-width: 90%;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .folder-browser h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .current-path {
+            background: #f7fafc;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            color: #4a5568;
+            font-family: monospace;
+        }
+
+        .folder-list {
+            max-height: 350px;
+            overflow-y: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            background: white;
+        }
+
+        .folder-item {
+            padding: 0.875rem 1rem;
+            cursor: pointer;
+            border-bottom: 1px solid #e2e8f0;
+            transition: all 0.2s ease;
+        }
+
+        .folder-item:hover {
+            background: #ebf8ff;
+            color: #3182ce;
+        }
+
+        .browser-actions {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: flex-end;
+        }
+
+        .browser-actions button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .browser-actions .btn-primary {
+            background: #3182ce;
+            color: white;
+        }
+
+        .browser-actions .btn-primary:hover {
+            background: #2c5aa0;
+        }
+
+        .browser-actions button:not(.btn-primary) {
+            background: #f7fafc;
+            color: #2d3748;
+            border: 1px solid #e2e8f0;
+        }
+
+        .browser-actions button:not(.btn-primary):hover {
+            background: #edf2f7;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Navigation Bar -->
+    <div class="top-navbar">
+        <div class="nav-logo">
+            <img src="../static/images/icon.png" alt="Seedr Logo">
+            <span class="nav-logo-text">Sonarr-Seedr</span>
+        </div>
+        <div class="nav-actions">
+            <button onclick="logout()" class="nav-btn logout-btn">🚪 Logout</button>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="/" class="nav-item">
+            <span>🏠</span> Home
+        </a>
+        <a href="/torrents" class="nav-item">
+            <span>➕</span> Add Torrent
+        </a>
+        <a href="/config" class="nav-item active">
+            <span>📁</span> Folder Watcher
+        </a>
+        <a href="/settings" class="nav-item">
+            <span>⚙️</span> Settings
+        </a>
+        <a href="#" class="nav-item">
+            <span>📊</span> Activity
+        </a>
+        <a href="#" class="nav-item">
+            <span>💾</span> System
+        </a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <h1 class="page-title">⚙️ Folder Watcher Setup</h1>
+            <p class="page-subtitle">Configure the folder watcher to automatically upload torrents and download
+                completed
+                files</p>
+
+            <div class="form-card">
+                <form method="POST" action="/api/watcher/config" id="setup-form">
+                    <div class="form-group">
+                        <label for="torrent_dir">📁 Torrent Directory</label>
+                        <div class="input-group">
+                            <input type="text" id="torrent_dir" name="torrent_dir"
+                                value="{{ watcher_settings.torrent_dir }}" required>
+                            <button type="button" class="browse-btn"
+                                onclick="browseFolders('torrent_dir')">Browse</button>
+                        </div>
+                        <div class="help-text">Directory where the .torrent files will be placed by Sonarr</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="download_dir">💾 Download Directory</label>
+                        <div class="input-group">
+                            <input type="text" id="download_dir" name="download_dir"
+                                value="{{ watcher_settings.download_dir if watcher_settings else config.download_dir }}"
+                                required>
+                            <button type="button" class="browse-btn"
+                                onclick="browseFolders('download_dir')">Browse</button>
+                        </div>
+                        <div class="help-text">Directory where downloaded files from Seedr will be saved</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="watch_interval">⏱️ Watch Interval (seconds)</label>
+                        <input type="number" id="watch_interval" name="watch_interval"
+                            value="{{ watcher_settings.watch_interval or 30 }}" min="10" max="300">
+                        <div class="help-text">How often to check for download status (10-300 seconds)</div>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="save_magnet_files" name="save_magnet_files" {% if
+                            watcher_settings.save_magnet_files %}checked{% endif %}>
+                        <label for="save_magnet_files">🔗 Save Magnet Files</label>
+                    </div>
+                    <div class="help-text" style="margin-bottom: 1.75rem;">Enable support for .magnet files</div>
+
+                    <div class="form-group">
+                        <label for="magnet_extension">🏷️ Magnet File Extension</label>
+                        <input type="text" id="magnet_extension" name="magnet_extension"
+                            value="{{ watcher_settings.magnet_extension or '.magnet' }}">
+                        <div class="help-text">Extension to use for magnet links (default: .magnet)</div>
+                    </div>
+
+                    <button type="submit" class="btn-submit">💾 Save Configuration</button>
+                    <input type="hidden" name="auto_start" value="true">
+                </form>
+            </div>
+        </div>
+
+        <div class="overlay" id="overlay"></div>
+        <div class="folder-browser" id="folder-browser">
+            <h3>📁 Select a Folder</h3>
+            <div class="current-path" id="current-path"></div>
+            <div class="folder-list" id="folder-list"></div>
+            <div class="browser-actions">
+                <button class="btn-primary" id="select-folder">Select</button>
+                <button onclick="closeFolderBrowser()">Cancel</button>
+            </div>
+        </div>
+
+        <script>
+            let currentTarget = null;
+            let currentPath = '';
+
+            function browseFolders(targetId) {
+                currentTarget = targetId;
+                document.getElementById('overlay').style.display = 'block';
+                document.getElementById('folder-browser').style.display = 'block';
+                loadFolders('');
+            }
+
+            function closeFolderBrowser() {
+                document.getElementById('overlay').style.display = 'none';
+                document.getElementById('folder-browser').style.display = 'none';
+            }
+
+            function loadFolders(path) {
+                fetch('/api/browse_folders', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ path: path })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            currentPath = data.current_path;
+                            document.getElementById('current-path').textContent = currentPath || 'Select Drive';
+
+                            const folderList = document.getElementById('folder-list');
+                            folderList.innerHTML = '';
+
+                            data.folders.forEach(folder => {
+                                const folderItem = document.createElement('div');
+                                folderItem.className = 'folder-item';
+                                folderItem.textContent = '📁 ' + folder;
+                                folderItem.onclick = () => loadFolders(folder);
+                                folderList.appendChild(folderItem);
+                            });
+
+                            document.getElementById('select-folder').onclick = () => {
+                                document.getElementById(currentTarget).value = currentPath;
+                                closeFolderBrowser();
+                            };
+                        } else {
+                            alert(`Error: ${data.message}`);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error loading folders.');
+                    });
+            }
+        </script>
+    </div>
+    </div>
+</body>
+
+</html>

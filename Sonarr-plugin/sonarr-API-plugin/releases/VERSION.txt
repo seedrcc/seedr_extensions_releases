@@ -1,0 +1,6 @@
+Sonarr-Seedr Integration
+Version: 1.1.0
+Build Date: 2025-02-11
+Build Name: SonarrSeedr-v1.1.0-20250211_183835
+
+Visit: https://github.com/yourusername/sonarr-seedr

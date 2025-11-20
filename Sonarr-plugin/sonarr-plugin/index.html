@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonarr-Seedr Plugin - Automatic TV Show Downloads</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.7;
+            color: #2d3748;
+            background: #f7fafc;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 20px 60px 20px;
+            background: white;
+            margin-bottom: 40px;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: #1a202c;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #4a5568;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 30px 0 0 0;
+        }
+
+        .badge {
+            background: #edf2f7;
+            color: #4a5568;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 16px;
+            padding: 50px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            margin-bottom: 30px;
+        }
+
+        .download-section {
+            background: linear-gradient(135deg, #667eea 0%, #5a67d8 100%);
+            color: white;
+            padding: 50px 40px;
+            border-radius: 12px;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .download-section h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .download-section p {
+            font-size: 1.05em;
+            opacity: 0.95;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: white;
+            color: #5a67d8;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1em;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary {
+            background: #48bb78;
+            color: white;
+            font-size: 1.15em;
+            padding: 16px 36px;
+        }
+
+        .btn-primary:hover {
+            background: #38a169;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #5a67d8;
+        }
+
+        .btn-secondary:hover {
+            border-color: #5a67d8;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .feature {
+            padding: 30px 25px;
+            background: #f7fafc;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .feature:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            border-color: #cbd5e0;
+        }
+
+        .feature-icon {
+            font-size: 2.5em;
+            margin-bottom: 18px;
+            display: block;
+        }
+
+        .feature h3 {
+            color: #2d3748;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .feature p {
+            color: #718096;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .quick-start {
+            background: #fef5e7;
+            border-left: 4px solid #f6ad55;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 40px 0;
+        }
+
+        .quick-start h3 {
+            color: #744210;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+
+        .quick-start ol {
+            margin-left: 25px;
+        }
+
+        .quick-start li {
+            margin: 15px 0;
+            color: #5f4e37;
+            line-height: 1.7;
+        }
+
+        .quick-start strong {
+            color: #744210;
+        }
+
+        .documentation-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .doc-card {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 30px 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #2d3748;
+            display: block;
+        }
+
+        .doc-card:hover {
+            border-color: #5a67d8;
+            box-shadow: 0 6px 18px rgba(90, 103, 216, 0.15);
+            transform: translateY(-2px);
+            background: white;
+        }
+
+        .doc-card h3 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .doc-card p {
+            color: #718096;
+            font-size: 0.95em;
+        }
+
+        .doc-icon {
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .system-requirements {
+            background: #e6f7ff;
+            border-left: 4px solid #4299e1;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 40px 0;
+        }
+
+        .system-requirements h3 {
+            color: #2c5282;
+            margin-bottom: 18px;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .system-requirements ul {
+            margin-left: 25px;
+        }
+
+        .system-requirements li {
+            margin: 10px 0;
+            color: #2d5a7b;
+        }
+
+        footer {
+            text-align: center;
+            color: #718096;
+            padding: 50px 20px 40px 20px;
+            background: white;
+            border-radius: 20px 20px 0 0;
+            margin-top: 40px;
+        }
+
+        footer p:first-child {
+            color: #2d3748;
+            font-weight: 600;
+        }
+
+        .warning {
+            background: #fff5f5;
+            border-left: 4px solid #fc8181;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 40px 0;
+        }
+
+        .warning h3 {
+            color: #c53030;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .warning ul {
+            margin-left: 25px;
+        }
+
+        .warning li {
+            margin: 10px 0;
+            color: #744210;
+        }
+
+        .warning a {
+            color: #c53030;
+            font-weight: 600;
+        }
+
+        h2 {
+            font-size: 1.9em;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        section {
+            margin: 50px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        thead tr {
+            background: #edf2f7;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #2d3748;
+            border-bottom: 2px solid #cbd5e0;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #4a5568;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        code {
+            background: #edf2f7;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #5a67d8;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            header {
+                padding: 50px 20px 40px 20px;
+            }
+
+            .main-content {
+                padding: 30px 20px;
+            }
+
+            .download-section {
+                padding: 40px 25px;
+            }
+
+            .download-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Sonarr-Seedr Plugin</h1>
+            <p>Automatically download torrents to Seedr cloud storage and sync with Sonarr for seamless TV show
+                management</p>
+            <div class="badges">
+                <span class="badge">✅ Windows 10/11</span>
+                <span class="badge">☁️ Cloud Storage</span>
+                <span class="badge">📺 Sonarr Integration</span>
+                <span class="badge">🔒 Secure OAuth2</span>
+                <span class="badge">🆓 Free & Open Source</span>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Download Section -->
+            <div class="download-section">
+                <h2>📦 Download & Get Started</h2>
+                <p>Everything you need to start downloading TV shows automatically</p>
+                <div class="download-buttons">
+                    <a href="https://github.com/jose987654/sonarr-plugin/releases/download/v1.1.10/SonarrSeedr-v1.1.10-20251611_130828.zip"
+                        class="btn btn-primary" download>
+                        ⬇️ Download Plugin (Latest Version)
+                    </a>
+                    <a href="https://github.com/jose987654/sonarr-plugin/releases/download/vSonarr-SeedrIntegration-AutomatedtorrentdownloadingviaSeedrcloudservice/SonarrSeedr-Setup-vSonarr-SeedrIntegration-AutomatedtorrentdownloadingviaSeedrcloudservice.exe"
+                        class="btn btn-primary" download>
+                        💿 Download Installer
+                    </a>
+                </div>
+                <p style="margin-top: 20px; font-size: 0.95em; opacity: 0.9;">Complete package with everything you need
+                    - just extract and run!</p>
+                <div class="download-buttons">
+                    <a href="WINDOWS_SETUP_GUIDE.html" class="btn btn-secondary" target="_blank">
+                        📖 View Setup Guide
+                    </a>
+                    <a href="QUICK_SETUP_STEPS.md" class="btn btn-secondary" download>
+                        ⚡ Quick Start Guide
+                    </a>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <h2 style="text-align: center; color: #1a202c; margin: 40px 0 30px 0;">✨ Key Features</h2>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Automatic Watching</h3>
+                    <p>Monitors directories for new torrent files automatically</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">☁️</div>
+                    <h3>Cloud Storage</h3>
+                    <p>Downloads torrents directly to Seedr cloud storage</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📺</div>
+                    <h3>Sonarr Integration</h3>
+                    <p>Seamlessly imports downloaded shows to Sonarr</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Web Interface</h3>
+                    <p>Easy-to-use dashboard at localhost:8242</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Secure OAuth2</h3>
+                    <p>Safe Seedr account connection with device authentication</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Portable</h3>
+                    <p>No installation required - just extract and run!</p>
+                </div>
+            </div>
+
+            <!-- Quick Start -->
+            <div class="quick-start">
+                <h3>⚡ Quick Start (4 Easy Steps)</h3>
+                <ol>
+                    <li><strong>Download & Extract:</strong> Download the ZIP file above and extract to any folder
+                        (e.g., C:\SonarrSeedr\)</li>
+                    <li><strong>Run the Application:</strong> Double-click SonarrSeedr.exe - browser opens at
+                        http://localhost:8242</li>
+                    <li><strong>Authenticate with Seedr:</strong> Click "Start Authentication", get device code, visit
+                        <a href="https://www.seedr.cc/device" target="_blank">seedr.cc/device</a>, enter code
+                    </li>
+                    <li><strong>Configure Folders:</strong> Set Torrent Folder & Watch Folder in the plugin, then use
+                        the <strong style="color: #c53030;">SAME EXACT PATHS</strong> in Sonarr's Download Client
+                        (Torrent Blackhole) settings
+                    </li>
+                </ol>
+                <p
+                    style="margin-top: 15px; background: #fff5f5; padding: 15px; border-radius: 8px; border-left: 4px solid #fc8181;">
+                    <strong style="color: #c53030;">⚠️ CRITICAL:</strong> The plugin watches these folders and passes
+                    files to Sonarr. Both MUST point to the same folder locations or it won't work!
+                </p>
+            </div>
+
+            <!-- System Requirements -->
+            <div class="system-requirements">
+                <h3>🖥️ System Requirements</h3>
+                <ul>
+                    <li><strong>Operating System:</strong> Windows 10 (64-bit) or Windows 11</li>
+                    <li><strong>RAM:</strong> 512MB minimum (1GB recommended)</li>
+                    <li><strong>Storage:</strong> 100MB for application files</li>
+                    <li><strong>Network:</strong> Stable internet connection</li>
+                    <li><strong>Ports:</strong> 8242 (plugin), 8989 (Sonarr - optional)</li>
+                </ul>
+            </div>
+
+            <!-- Sonarr Configuration Guide -->
+            <h2 style="text-align: center; color: #1a202c; margin: 50px 0 30px 0;">⚙️ How to Configure Sonarr Download
+                Client</h2>
+            <div
+                style="background: #fff5f5; border: 2px solid #fc8181; border-radius: 12px; padding: 30px; margin-bottom: 40px;">
+                <h3 style="color: #c53030; margin-bottom: 20px;">🎯 CRITICAL: You MUST Use "Torrent Blackhole"</h3>
+                <p style="color: #744210; font-size: 1.05em; margin-bottom: 25px;">This plugin works ONLY with Sonarr's
+                    <strong>"Torrent Blackhole"</strong> download client. Do not use other download clients like
+                    qBittorrent, Transmission, etc. for this plugin.
+                </p>
+
+                <h3 style="color: #2d3748; margin: 30px 0 15px 0;">📝 Step-by-Step Configuration:</h3>
+                <ol style="color: #4a5568; font-size: 1.05em; line-height: 2; margin-left: 25px;">
+                    <li><strong>Open Sonarr</strong> web interface at <code>http://localhost:8989</code></li>
+                    <li><strong>Click Settings</strong> (gear icon ⚙️) in the top menu</li>
+                    <li><strong>Click "Download Clients"</strong> in the left sidebar</li>
+                    <li><strong>Click the "+" button</strong> to add a new download client</li>
+                    <li><strong>Select "Torrent Blackhole"</strong> from the list (see image below)</li>
+                    <li><strong>Fill in the configuration:</strong>
+                        <ul style="margin-top: 15px;">
+                            <li><strong>Name:</strong> <code>Sonarr-Seedr Plugin</code> (or any name you prefer)</li>
+                            <li><strong>Enable:</strong> ✅ <strong>Check this box!</strong></li>
+                            <li><strong>Torrent Folder:</strong> Use the <strong style="color: #c53030;">EXACT SAME
+                                    PATH</strong> you configured in the plugin (e.g., <code>D:\Torrents\</code>)</li>
+                            <li><strong>Watch Folder:</strong> Use the <strong style="color: #c53030;">EXACT SAME
+                                    PATH</strong> you configured in the plugin (e.g., <code>D:\Downloads\</code>)</li>
+                            <li><strong>Save Magnet Files:</strong> ✅ Check this box</li>
+                            <li><strong>Magnet File Extension:</strong> <code>.magnet</code></li>
+                        </ul>
+                    </li>
+                    <li><strong>Click "Test"</strong> button - you should see a green checkmark ✅</li>
+                    <li><strong>Click "Save"</strong> to save the configuration</li>
+                    <li><strong>Verify</strong> the download client shows as "Enabled" in the list</li>
+                </ol>
+
+                <div style="margin: 30px 0; text-align: center;">
+                    <img src="images/sonarr-setup-1.png" alt="Sonarr Download Client Selection"
+                        style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); margin-bottom: 15px;">
+                    <p style="color: #718096; font-size: 0.9em; margin-top: 10px;">↑ Select "Torrent Blackhole" from the
+                        download client list</p>
+
+                    <img src="images/sonarr-setup-2.png" alt="Sonarr Torrent Blackhole Configuration"
+                        style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); margin-top: 30px; margin-bottom: 15px;">
+                    <p style="color: #718096; font-size: 0.9em; margin-top: 10px;">↑ Configure with the same folders you
+                        set in the plugin</p>
+                </div>
+
+                <div
+                    style="background: #fef5e7; border-left: 4px solid #f6ad55; padding: 20px; border-radius: 8px; margin-top: 25px;">
+                    <h4 style="color: #744210; margin-bottom: 10px;">⚠️ Common Mistakes to Avoid:</h4>
+                    <ul style="color: #5f4e37; margin-left: 25px; line-height: 1.8;">
+                        <li>❌ Using a different download client (qBittorrent, Deluge, etc.) - won't work!</li>
+                        <li>❌ Using different folder paths in Sonarr than in the plugin</li>
+                        <li>❌ Forgetting to enable the download client (checkbox must be checked!)</li>
+                        <li>❌ Not checking the "Save Magnet Files" option</li>
+                        <li>❌ Typing folder paths with typos or extra spaces</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Documentation Links -->
+            <h2 style="text-align: center; color: #1a202c; margin: 40px 0 30px 0;">📚 Documentation</h2>
+            <div class="documentation-links">
+                <a href="WINDOWS_SETUP_GUIDE.html" class="doc-card" target="_blank">
+                    <div class="doc-icon">📖</div>
+                    <h3>Complete Setup Guide</h3>
+                    <p>Detailed step-by-step instructions for Windows setup</p>
+                </a>
+                <a href="QUICK_SETUP_STEPS.md" class="doc-card" download>
+                    <div class="doc-icon">⚡</div>
+                    <h3>Quick Setup Steps</h3>
+                    <p>Fast track guide to get running in minutes</p>
+                </a>
+                <a href="README.md" class="doc-card" download>
+                    <div class="doc-icon">📄</div>
+                    <h3>README</h3>
+                    <p>Project overview and general information</p>
+                </a>
+            </div>
+
+            <!-- Prerequisites -->
+            <div class="warning">
+                <h3>📋 Before You Start</h3>
+                <p><strong>You will need:</strong></p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Seedr Account:</strong> Sign up free at <a href="https://www.seedr.cc" target="_blank"
+                            style="color: #c62828;">www.seedr.cc</a></li>
+                    <li><strong>Sonarr (Recommended):</strong> Download from <a href="https://sonarr.tv" target="_blank"
+                            style="color: #c62828;">sonarr.tv</a> for TV show organization</li>
+                    <li><strong>Two Folders:</strong> Create a Torrent Folder (e.g., D:\Torrents) and Watch Folder
+                        (e.g., D:\Downloads) - you'll configure these in BOTH the plugin AND Sonarr</li>
+                    <li><strong>Windows Defender:</strong> May need to allow the application through your firewall</li>
+                </ul>
+            </div>
+
+            <!-- How It Works -->
+            <h2 style="text-align: center; color: #1a202c; margin: 40px 0 20px 0;">🔄 How It Works</h2>
+            <div style="background: #f7fafc; padding: 35px; border-radius: 12px; border: 1px solid #e2e8f0;">
+                <ol style="font-size: 1.05em; line-height: 2; color: #4a5568;">
+                    <li><strong style="color: #2d3748;">Drop a .torrent file</strong> into your Torrent Folder
+                        (configured in both plugin & Sonarr)</li>
+                    <li><strong style="color: #2d3748;">Plugin watches folder and detects</strong> the file, then
+                        uploads to Seedr cloud</li>
+                    <li><strong style="color: #2d3748;">Seedr downloads</strong> the torrent content to cloud storage
+                    </li>
+                    <li><strong style="color: #2d3748;">Plugin downloads</strong> completed files to your Watch Folder
+                    </li>
+                    <li><strong style="color: #2d3748;">Sonarr watches same folder</strong> and imports the TV show</li>
+                    <li><strong style="color: #2d3748;">Enjoy watching!</strong> Your show is ready in your library</li>
+                </ol>
+                <div
+                    style="background: #fff5f5; border-left: 4px solid #fc8181; padding: 20px; border-radius: 8px; margin-top: 25px;">
+                    <p style="color: #c53030; font-weight: 600; margin-bottom: 10px;">🔗 Why Same Folders?</p>
+                    <p style="color: #744210; font-size: 0.95em; line-height: 1.7;">The plugin and Sonarr work together
+                        by watching the same folders. Plugin watches Torrent Folder for new torrents to upload. Plugin
+                        downloads to Watch Folder. Sonarr watches Watch Folder to import. They MUST be configured with
+                        identical paths in both applications!</p>
+                </div>
+            </div>
+
+            <!-- Troubleshooting -->
+            <h2 style="text-align: center; color: #1a202c; margin: 40px 0 20px 0;">🔧 Quick Troubleshooting</h2>
+            <div style="background: #f7fafc; padding: 30px; border-radius: 12px; border: 1px solid #e2e8f0;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #edf2f7;">
+                            <th style="padding: 15px; text-align: left; color: #2d3748; font-weight: 600;">Problem</th>
+                            <th style="padding: 15px; text-align: left; color: #2d3748; font-weight: 600;">Solution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #e2e8f0;">
+                            <td style="padding: 15px; color: #4a5568;">App won't start</td>
+                            <td style="padding: 15px; color: #4a5568;">Run as Administrator or use debug.bat</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e2e8f0;">
+                            <td style="padding: 15px; color: #4a5568;">Port 8242 busy</td>
+                            <td style="padding: 15px; color: #4a5568;">Run: SonarrSeedr.exe --port 8001</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e2e8f0;">
+                            <td style="padding: 15px; color: #4a5568;">Authentication fails</td>
+                            <td style="padding: 15px; color: #4a5568;">Check internet, try new device code</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; color: #4a5568;">Torrents not processing</td>
+                            <td style="padding: 15px; color: #4a5568;">Check folder permissions and watcher status</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Support Section -->
+            <h2 style="text-align: center; color: #1a202c; margin: 40px 0 30px 0;">🆘 Need Help?</h2>
+            <div
+                style="text-align: center; padding: 35px; background: #f7fafc; border-radius: 12px; border: 1px solid #e2e8f0;">
+                <p style="font-size: 1.05em; margin-bottom: 25px; color: #4a5568;">Having issues? Check these resources:
+                </p>
+                <div class="download-buttons">
+                    <a href="WINDOWS_SETUP_GUIDE.html" class="btn btn-secondary" target="_blank">
+                        📖 Full Setup Guide
+                    </a>
+                    <a href="QUICK_SETUP_STEPS.md" class="btn btn-secondary" download>
+                        ⚡ Quick Troubleshooting
+                    </a>
+                </div>
+                <p style="margin-top: 25px; color: #718096; font-size: 0.95em;">
+                    💡 <strong>Tip:</strong> Run <code>debug.bat</code> (included in the ZIP) to see detailed error
+                    messages
+                </p>
+            </div>
+        </div>
+
+        <footer>
+            <p style="font-size: 1.15em; margin-bottom: 12px;">⭐ Star this project if you find it helpful!</p>
+            <p style="color: #4a5568; margin-bottom: 8px;">Made with ❤️ for the Plex/Sonarr community</p>
+            <p style="color: #a0aec0; margin-top: 15px; font-size: 0.9em;">Licensed under MIT License</p>
+        </footer>
+    </div>
+</body>
+
+</html>
