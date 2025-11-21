@@ -1,5 +1,5 @@
-('D:\\New folder (3)\\New folder (5)\\Seedr '
- 'Plugins\\sonarr-fast-API-plugin\\build\\sonarr_seedr\\SonarrSeedr.pkg',
+('D:\\New folder (3)\\New folder (5)\\New folder '
+ '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\build\\sonarr_seedr\\SonarrSeedr.pkg',
  {'BINARY': True,
   'DATA': True,
   'EXECUTABLE': True,
@@ -11,35 +11,36 @@
   'SYMLINK': False},
  [('pyi-contents-directory _internal', '', 'OPTION'),
   ('PYZ-00.pyz',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\build\\sonarr_seedr\\PYZ-00.pyz',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\build\\sonarr_seedr\\PYZ-00.pyz',
    'PYZ'),
   ('struct',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\build\\sonarr_seedr\\localpycs\\struct.pyc',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\build\\sonarr_seedr\\localpycs\\struct.pyc',
    'PYMODULE'),
   ('pyimod01_archive',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\build\\sonarr_seedr\\localpycs\\pyimod01_archive.pyc',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\build\\sonarr_seedr\\localpycs\\pyimod01_archive.pyc',
    'PYMODULE'),
   ('pyimod02_importers',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\build\\sonarr_seedr\\localpycs\\pyimod02_importers.pyc',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\build\\sonarr_seedr\\localpycs\\pyimod02_importers.pyc',
    'PYMODULE'),
   ('pyimod03_ctypes',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\build\\sonarr_seedr\\localpycs\\pyimod03_ctypes.pyc',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\build\\sonarr_seedr\\localpycs\\pyimod03_ctypes.pyc',
    'PYMODULE'),
   ('pyimod04_pywin32',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\build\\sonarr_seedr\\localpycs\\pyimod04_pywin32.pyc',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\build\\sonarr_seedr\\localpycs\\pyimod04_pywin32.pyc',
    'PYMODULE'),
   ('pyiboot01_bootstrap',
    'C:\\Users\\k84352235\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\loader\\pyiboot01_bootstrap.py',
    'PYSOURCE'),
-  ('hook-app',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\hook-app.py',
+  ('hook app',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\hook '
+   'app.py',
    'PYSOURCE'),
   ('pyi_rth_inspect',
    'C:\\Users\\k84352235\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_inspect.py',
@@ -54,8 +55,8 @@
    'C:\\Users\\k84352235\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_setuptools.py',
    'PYSOURCE'),
   ('run',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\run.py',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\run.py',
    'PYSOURCE')],
  'python313.dll',
  True,

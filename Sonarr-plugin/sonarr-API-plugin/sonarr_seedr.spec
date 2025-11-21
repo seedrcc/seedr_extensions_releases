@@ -16,7 +16,7 @@ datas = [
     ('app', 'app'),
     
     # Include the icon file for system tray
-    ('logo.ico', '.'),
+    ('icons/logo.ico', '.'),
     
     # Include config directory structure (but not sensitive files)
     ('config', 'config'),
@@ -221,7 +221,7 @@ a = Analysis(
     hiddenimports=hiddenimports,
     hookspath=[app_dir],  # Add current directory to hook search path
     hooksconfig={},
-    runtime_hooks=['hook-app.py'],  # Add our custom runtime hook
+    runtime_hooks=['hook app.py'],  # Add our custom runtime hook
     excludes=[],
     win_no_prefer_redirects=False,
     win_private_assemblies=False,
@@ -249,7 +249,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon='logo.ico',  # Custom application icon
+    icon='icons/logo.ico',  # Custom application icon
 )
 
 # Create distribution folder

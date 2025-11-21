@@ -1,5 +1,5 @@
-('D:\\New folder (3)\\New folder (5)\\Seedr '
- 'Plugins\\sonarr-fast-API-plugin\\build\\sonarr_seedr\\PYZ-00.pyz',
+('D:\\New folder (3)\\New folder (5)\\New folder '
+ '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\build\\sonarr_seedr\\PYZ-00.pyz',
  [('PIL',
    'C:\\Users\\k84352235\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PIL\\__init__.py',
    'PYMODULE'),
@@ -493,76 +493,76 @@
    'C:\\Users\\k84352235\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\anyio\\to_thread.py',
    'PYMODULE'),
   ('app',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\app\\__init__.py',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\app\\__init__.py',
    'PYMODULE'),
   ('app.api',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\app\\api\\__init__.py',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\app\\api\\__init__.py',
    'PYMODULE'),
   ('app.api.seedr_client',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\app\\api\\seedr_client.py',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\app\\api\\seedr_client.py',
    'PYMODULE'),
   ('app.api.sonarr_client',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\app\\api\\sonarr_client.py',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\app\\api\\sonarr_client.py',
    'PYMODULE'),
   ('app.auth',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\app\\auth\\__init__.py',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\app\\auth\\__init__.py',
    'PYMODULE'),
   ('app.auth.oauth_handler',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\app\\auth\\oauth_handler.py',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\app\\auth\\oauth_handler.py',
    'PYMODULE'),
   ('app.config',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\app\\config.py',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\app\\config.py',
    'PYMODULE'),
   ('app.main',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\app\\main.py',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\app\\main.py',
    'PYMODULE'),
   ('app.service',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\app\\service\\__init__.py',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\app\\service\\__init__.py',
    'PYMODULE'),
   ('app.service.seedr_sonarr_integration',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\app\\service\\seedr_sonarr_integration.py',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\app\\service\\seedr_sonarr_integration.py',
    'PYMODULE'),
   ('app.service.update_service',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\app\\service\\update_service.py',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\app\\service\\update_service.py',
    'PYMODULE'),
   ('app.tray_icon',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\app\\tray_icon.py',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\app\\tray_icon.py',
    'PYMODULE'),
   ('app.utils',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\app\\utils\\__init__.py',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\app\\utils\\__init__.py',
    'PYMODULE'),
   ('app.utils.paths',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\app\\utils\\paths.py',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\app\\utils\\paths.py',
    'PYMODULE'),
   ('app.utils.torrent_watcher',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\app\\utils\\torrent_watcher.py',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\app\\utils\\torrent_watcher.py',
    'PYMODULE'),
   ('app.version',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\app\\version.py',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\app\\version.py',
    'PYMODULE'),
   ('app.web',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\app\\web\\__init__.py',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\app\\web\\__init__.py',
    'PYMODULE'),
   ('app.web.routes',
-   'D:\\New folder (3)\\New folder (5)\\Seedr '
-   'Plugins\\sonarr-fast-API-plugin\\app\\web\\routes.py',
+   'D:\\New folder (3)\\New folder (5)\\New folder '
+   '(11)\\Plugins\\Seedr-plugins\\Sonarr-plugin\\sonarr-API-plugin\\app\\web\\routes.py',
    'PYMODULE'),
   ('argparse',
    'C:\\Users\\k84352235\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\argparse.py',

@@ -2,7 +2,7 @@
 ; Generated for Inno Setup 6.x
 
 #define MyAppName "Seedr"
-#define MyAppVersion "Sonarr-SeedrIntegration-AutomatedtorrentdownloadingviaSeedrcloudservice"
+#define MyAppVersion "1.1.13"
 #define MyAppPublisher "Joseph"
 #define MyAppURL "https://github.com/jose987654/sonarr-plugin"
 #define MyAppExeName "SonarrSeedr.exe"
@@ -27,7 +27,7 @@ OutputDir=releases\installers
 OutputBaseFilename=SonarrSeedr-Setup-v{#MyAppVersion}
 Compression=lzma2/ultra64
 SolidCompression=yes
-SetupIconFile=logo.ico
+SetupIconFile=icons\logo.ico
 UninstallDisplayIcon={app}\{#MyAppExeName}
 UninstallDisplayName={#MyAppName}
 WizardStyle=modern

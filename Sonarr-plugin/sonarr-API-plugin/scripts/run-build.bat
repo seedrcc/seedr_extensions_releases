@@ -1,16 +1,23 @@
 @echo off
+cd /d "%~dp0"
+
 echo ================================
 echo Sonarr-Seedr Build Wrapper
 echo ================================
 echo.
-echo This window will stay open to show you all output.
+echo Current directory: %CD%
 echo.
-pause
 
 REM Run the build script
-call build.bat
+call "build.bat"
 
-echo.
+if %errorlevel% neq 0 (
+    echo.
+    echo ERROR: Build failed!
+    pause
+    exit /b 1
+)
+
 echo.
 echo ================================
 echo Build process completed!
@@ -18,7 +25,5 @@ echo ================================
 echo.
 echo Check above for any errors.
 echo.
-echo Press any key to close this window...
-pause > nul
-exit
+pause
 
