@@ -10,7 +10,7 @@
 ## ✨ Features
 
 - 🔄 **Automatic Torrent Watching** - Monitors directories for new torrent files
-- ☁️ **Seedr Cloud Integration** - Uploads torrents to Seedr cloud for remote downloading
+- ☁️ **Seedr Cloud Integration** - Uploads torrentsr to Seedr cloud for remote downloading
 - 📥 **Auto-Download to Local** - Automatically downloads completed files from Seedr to your computer
 - 🔁 **Smart Polling** - Checks every 30 seconds for completed downloads
 - 📺 **Sonarr Integration** - Automatically imports downloaded shows to Sonarr
