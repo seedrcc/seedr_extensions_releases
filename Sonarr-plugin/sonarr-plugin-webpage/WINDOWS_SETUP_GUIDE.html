@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows Setup Guide - Sonarr-Seedr Plugin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .nav {
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-links {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .content {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin: 30px 0 15px 0;
+        }
+
+        h4 {
+            color: #667eea;
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+        }
+
+        p {
+            margin: 15px 0;
+            line-height: 1.8;
+        }
+
+        ul,
+        ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin: 10px 0;
+            line-height: 1.8;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #e83e8c;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .success-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4CAF50;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .error-box {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        thead {
+            background: #667eea;
+            color: white;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #667eea;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5em;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            background: #764ba2;
+            transform: translateY(-3px);
+        }
+
+        .emoji {
+            font-size: 1.2em;
+        }
+
+        footer {
+            background: #2d2d2d;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+        }
+
+        @media print {
+
+            .nav,
+            .back-to-top {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>🖥️ Windows Setup Guide</h1>
+        <p>Complete guide to set up the Sonarr-Seedr plugin on Windows</p>
+    </div>
+
+    <nav class="nav">
+        <div class="nav-links">
+            <a href="#requirements">System Requirements</a>
+            <a href="#prerequisites">Prerequisites</a>
+            <a href="#installation">Installation</a>
+            <a href="#configuration">Configuration</a>
+            <a href="#sonarr-setup">Sonarr Setup</a>
+            <a href="#seedr-setup">Seedr Setup</a>
+            <a href="#workflow">Workflow</a>
+            <a href="#troubleshooting">Troubleshooting</a>
+            <a href="#faq">FAQ</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="content">
+            <!-- System Requirements -->
+            <section id="requirements">
+                <h2>🖥️ System Requirements</h2>
+
+                <h3>Minimum Requirements</h3>
+                <ul>
+                    <li><strong>Operating System:</strong> Windows 10 (64-bit) or Windows 11</li>
+                    <li><strong>RAM:</strong> 512MB minimum (1GB recommended)</li>
+                    <li><strong>Storage:</strong> 100MB for application files</li>
+                    <li><strong>Network:</strong> Stable internet connection</li>
+                    <li><strong>Ports:</strong> 8242 (default web interface), 8989 (Sonarr)</li>
+                </ul>
+
+                <h3>Recommended Requirements</h3>
+                <ul>
+                    <li><strong>RAM:</strong> 2GB or more</li>
+                    <li><strong>Storage:</strong> 1GB+ for application and temporary files</li>
+                    <li><strong>Network:</strong> High-speed internet for faster downloads</li>
+                    <li><strong>SSD:</strong> For better performance</li>
+                </ul>
+            </section>
+
+            <!-- Prerequisites -->
+            <section id="prerequisites">
+                <h2>📦 Prerequisites</h2>
+
+                <h3>1. Seedr Account</h3>
+                <ul>
+                    <li><strong>Free Account:</strong> 2GB storage, limited download speed</li>
+                    <li><strong>Premium Account:</strong> Up to 1TB storage, faster downloads</li>
+                    <li><strong>Sign up:</strong> <a href="https://www.seedr.cc"
+                            target="_blank">https://www.seedr.cc</a></li>
+                </ul>
+
+                <h3>2. Sonarr (Optional but Recommended)</h3>
+                <ul>
+                    <li><strong>Download:</strong> <a href="https://sonarr.tv" target="_blank">https://sonarr.tv</a>
+                    </li>
+                    <li><strong>Purpose:</strong> Organize and manage your TV show library</li>
+                    <li><strong>Alternative:</strong> Use without Sonarr for basic torrent downloading</li>
+                </ul>
+
+                <h3>3. Windows Features</h3>
+                <ul>
+                    <li><strong>Windows Defender:</strong> May need to allow the application</li>
+                    <li><strong>Firewall:</strong> Ensure port 8242 is accessible</li>
+                    <li><strong>User Account Control:</strong> May require admin privileges for some operations</li>
+                </ul>
+            </section>
+
+            <!-- Installation -->
+            <section id="installation">
+                <h2>🚀 Installation Steps</h2>
+
+                <h3>Step 1: Download the Plugin</h3>
+                <ol>
+                    <li><strong>Download</strong> the latest release: <a href="https://github.com/jose987654/sonarr-plugin/releases/download/v1.1.10/SonarrSeedr-v1.1.10-20251611_130828.zip</a></li>
+                    <li><strong>Extract</strong> the ZIP file to any folder
+                        <ul>
+                            <li>Example: <code>C:\SonarrSeedr\</code></li>
+                            <li>Avoid system folders like <code>Program Files</code></li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3>Step 2: Directory Structure</h3>
+                <pre><code>C:\SonarrSeedr\
+├── SonarrSeedr.exe          # Main application
+├── debug.bat                # Debug script
+├── README.md                # Documentation
+├── QUICK_SETUP_STEPS.md     # Quick start guide
+├── WINDOWS_SETUP_GUIDE.md   # This guide
+└── _internal\               # Application files (don't modify)</code></pre>
+
+                <h3>Step 3: Run the Application</h3>
+                <ol>
+                    <li><strong>Double-click</strong> <code>SonarrSeedr.exe</code></li>
+                    <li><strong>Wait</strong> for the application to start (may take 10-30 seconds)</li>
+                    <li><strong>Browser</strong> should automatically open to <code>http://localhost:8242</code></li>
+                    <li>If browser doesn't open, manually navigate to the URL</li>
+                </ol>
+
+                <div class="success-box">
+                    <h4>✅ Verify Installation</h4>
+                    <ul>
+                        <li><strong>Web Interface:</strong> Should load at <code>http://localhost:8242</code></li>
+                        <li><strong>No Error Messages:</strong> Check console output for errors</li>
+                        <li><strong>Port Available:</strong> Ensure port 8242 isn't used by another application</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Initial Configuration -->
+            <section id="configuration">
+                <h2>⚙️ Initial Configuration</h2>
+
+                <h3>Step 1: Access Web Interface</h3>
+                <ol>
+                    <li><strong>Open</strong> your web browser</li>
+                    <li><strong>Navigate</strong> to <code>http://localhost:8242</code></li>
+                    <li><strong>Wait</strong> for the dashboard to load</li>
+                </ol>
+
+                <h3>Step 2: Configure Directories</h3>
+                <ol>
+                    <li><strong>Click</strong> "Settings" or "Configuration" in the web interface</li>
+                    <li><strong>Set Torrent Directory:</strong>
+                        <ul>
+                            <li>Choose where you'll place <code>.torrent</code> files</li>
+                            <li>Example: <code>C:\Users\[YourName]\Downloads\Torrents</code></li>
+                            <li><strong>Create</strong> the folder if it doesn't exist</li>
+                        </ul>
+                    </li>
+                    <li><strong>Set Download Directory:</strong>
+                        <ul>
+                            <li>Choose where completed downloads will be saved</li>
+                            <li>Example: <code>C:\Users\[YourName]\Downloads\Completed</code></li>
+                            <li><strong>Create</strong> the folder if it doesn't exist</li>
+                        </ul>
+                    </li>
+                    <li><strong>Click</strong> "Save Configuration"</li>
+                </ol>
+
+                <div class="info-box">
+                    <h4>📌 Important: Folder Synchronization</h4>
+                    <p>The <strong>Torrent Folder</strong> and <strong>Watch Folder</strong> you set in the plugin
+                        <strong>MUST match exactly</strong> with the folders you configure in Sonarr. This is critical
+                        for automatic workflow!</p>
+                </div>
+
+                <h3>Step 3: Start Torrent Watcher</h3>
+                <ol>
+                    <li><strong>Navigate</strong> to "Folder Watcher" section</li>
+                    <li><strong>Click</strong> "Start Watcher"</li>
+                    <li><strong>Verify</strong> status shows "Running"</li>
+                    <li>The app will now monitor your torrent directory</li>
+                </ol>
+            </section>
+
+            <!-- Sonarr Setup -->
+            <section id="sonarr-setup">
+                <h2>📺 Sonarr Setup</h2>
+
+                <h3>Step 1: Install Sonarr (if not already installed)</h3>
+                <ol>
+                    <li><strong>Download</strong> Sonarr from <a href="https://sonarr.tv"
+                            target="_blank">https://sonarr.tv</a></li>
+                    <li><strong>Install</strong> following the Windows installer</li>
+                    <li><strong>Start</strong> Sonarr service</li>
+                    <li><strong>Access</strong> web interface at <code>http://localhost:8989</code></li>
+                </ol>
+
+                <h3>Step 2: Set Up Root Folder in Sonarr</h3>
+                <ol>
+                    <li><strong>In Sonarr</strong>, go to Settings → Media Management</li>
+                    <li><strong>Add</strong> a root folder for your TV shows
+                        <ul>
+                            <li>Example: <code>C:\TV Shows</code> or <code>D:\Media\TV Shows</code></li>
+                        </ul>
+                    </li>
+                    <li><strong>Note</strong> this path for later use</li>
+                </ol>
+
+                <h3>Step 3: Add Plugin as Download Client in Sonarr</h3>
+                <div class="warning-box">
+                    <p><strong>⚠️ Critical Step:</strong> Follow these instructions carefully to ensure proper
+                        integration!</p>
+                </div>
+
+                <ol>
+                    <li><strong>Open Sonarr</strong> web interface (<code>http://localhost:8989</code>)</li>
+                    <li><strong>Click</strong> "Settings" (gear icon) in the top menu</li>
+                    <li><strong>Click</strong> "Download Clients" in the left sidebar</li>
+                    <li><strong>Click</strong> the "+" button (Add Download Client)</li>
+                    <li><strong>Select</strong> "Torrent Blackhole" from the dropdown list</li>
+                    <li><strong>Fill in the form:</strong>
+                        <ul>
+                            <li><strong>Name:</strong> Type "Sonarr-Seedr Plugin"</li>
+                            <li><strong>Enable:</strong> ✓ Check this box</li>
+                            <li><strong>Torrent Folder:</strong> Click folder icon, choose the SAME folder you set in
+                                the plugin (e.g., <code>D:\Torrents\</code>)</li>
+                            <li><strong>Watch Folder:</strong> Click folder icon, choose the SAME folder you set in the
+                                plugin (e.g., <code>D:\Downloads\</code>)</li>
+                            <li><strong>Save Magnet Files:</strong> ✓ Check this box</li>
+                            <li><strong>Save Magnet Files Extension:</strong> Keep as <code>.magnet</code></li>
+                        </ul>
+                    </li>
+                    <li><strong>Click</strong> "Test" button (should show green checkmark)</li>
+                    <li><strong>Click</strong> "Save" button</li>
+                    <li><strong>Make sure</strong> the download client is ENABLED in Sonarr</li>
+                    <li><strong>Test the setup:</strong> Drop a .torrent file in your Torrent Folder to verify
+                        everything works</li>
+                </ol>
+            </section>
+
+            <!-- Seedr Setup -->
+            <section id="seedr-setup">
+                <h2>☁️ Seedr Account Setup</h2>
+
+                <h3>Step 1: Create Seedr Account</h3>
+                <ol>
+                    <li><strong>Visit</strong> <a href="https://www.seedr.cc" target="_blank">https://www.seedr.cc</a>
+                    </li>
+                    <li><strong>Sign up</strong> for a free account</li>
+                    <li><strong>Verify</strong> your email address</li>
+                    <li><strong>Note</strong> your login credentials</li>
+                </ol>
+
+                <h3>Step 2: Authenticate with Plugin</h3>
+                <ol>
+                    <li><strong>In the plugin web interface</strong>, click "Start Authentication"</li>
+                    <li><strong>You'll receive</strong> a device code (e.g., <code>AB12-CD34</code>)</li>
+                    <li><strong>Open</strong> a new browser tab</li>
+                    <li><strong>Go to</strong> <a href="https://www.seedr.cc/device"
+                            target="_blank">https://www.seedr.cc/device</a></li>
+                    <li><strong>Enter</strong> the device code</li>
+                    <li><strong>Approve</strong> the application</li>
+                    <li><strong>Return</strong> to the plugin interface</li>
+                    <li><strong>Wait</strong> for authentication to complete</li>
+                </ol>
+
+                <div class="success-box">
+                    <h4>✅ Verify Connection</h4>
+                    <ul>
+                        <li><strong>Status</strong> should show "Connected to Seedr"</li>
+                        <li><strong>Account info</strong> should display your Seedr details</li>
+                        <li><strong>No error messages</strong> in the interface</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Complete Workflow -->
+            <section id="workflow">
+                <h2>🔄 Complete Workflow</h2>
+
+                <h3>How It Works</h3>
+                <div class="info-box">
+                    <ol style="font-size: 1.1em;">
+                        <li>Download .torrent file to your computer</li>
+                        <li>Place in watched directory</li>
+                        <li>Plugin detects file automatically</li>
+                        <li>Uploads to Seedr cloud</li>
+                        <li>Seedr downloads content</li>
+                        <li>Plugin downloads from Seedr to local folder</li>
+                        <li>Sonarr imports and organizes the show</li>
+                        <li>TV show ready to watch!</li>
+                    </ol>
+                </div>
+
+                <h3>Step-by-Step Daily Usage</h3>
+
+                <h4>1. Find a Torrent</h4>
+                <ul>
+                    <li><strong>Search</strong> for TV show torrents on sites like EZTV, RARBG, etc.</li>
+                    <li><strong>Download</strong> the <code>.torrent</code> file to your computer</li>
+                </ul>
+
+                <h4>2. Add to Watched Directory</h4>
+                <ul>
+                    <li><strong>Copy</strong> or <strong>move</strong> the <code>.torrent</code> file to your configured
+                        torrent directory</li>
+                    <li><strong>Example:</strong> <code>C:\Users\[YourName]\Downloads\Torrents\</code></li>
+                </ul>
+
+                <h4>3. Automatic Processing</h4>
+                <p>The plugin will automatically:</p>
+                <ul>
+                    <li>✅ <strong>Detect</strong> the new torrent file</li>
+                    <li>✅ <strong>Upload</strong> it to your Seedr account</li>
+                    <li>✅ <strong>Start</strong> downloading in Seedr cloud</li>
+                    <li>✅ <strong>Monitor</strong> download progress</li>
+                    <li>✅ <strong>Download</strong> completed files to your local directory</li>
+                    <li>✅ <strong>Import</strong> to Sonarr for organization</li>
+                </ul>
+
+                <h4>4. View Results</h4>
+                <ul>
+                    <li><strong>Seedr:</strong> <a href="https://www.seedr.cc" target="_blank">www.seedr.cc</a> - See
+                        cloud downloads</li>
+                    <li><strong>Plugin:</strong> <code>http://localhost:8242</code> - Monitor progress</li>
+                    <li><strong>Sonarr:</strong> <code>http://localhost:8989</code> - See organized TV shows</li>
+                    <li><strong>Local Folder:</strong> Check your download directory for files</li>
+                </ul>
+            </section>
+
+            <!-- Troubleshooting -->
+            <section id="troubleshooting">
+                <h2>🔧 Troubleshooting</h2>
+
+                <h3>Common Issues and Solutions</h3>
+
+                <div class="error-box">
+                    <h4>❌ Application Won't Start</h4>
+                    <p><strong>Problem:</strong> <code>SonarrSeedr.exe</code> doesn't start or crashes immediately</p>
+                    <p><strong>Solutions:</strong></p>
+                    <ol>
+                        <li><strong>Run as Administrator:</strong> Right-click → "Run as administrator"</li>
+                        <li><strong>Check Windows Defender:</strong> Add exception for the application folder</li>
+                        <li><strong>Use Debug Mode:</strong> Run <code>debug.bat</code> to see error messages</li>
+                        <li><strong>Check Port:</strong> Ensure port 8242 isn't used by another application</li>
+                    </ol>
+                </div>
+
+                <div class="error-box">
+                    <h4>❌ Port 8242 Already in Use</h4>
+                    <p><strong>Problem:</strong> "Port 8242 is already in use" error</p>
+                    <p><strong>Solutions:</strong></p>
+                    <ol>
+                        <li><strong>Find and close</strong> the application using port 8242</li>
+                        <li><strong>Use different port:</strong> Run <code>SonarrSeedr.exe --port 8001</code></li>
+                        <li><strong>Check</strong> if another instance is already running</li>
+                    </ol>
+                </div>
+
+                <div class="error-box">
+                    <h4>❌ Authentication Fails</h4>
+                    <p><strong>Problem:</strong> Can't connect to Seedr account</p>
+                    <p><strong>Solutions:</strong></p>
+                    <ol>
+                        <li><strong>Check internet connection</strong></li>
+                        <li><strong>Verify</strong> device code is entered correctly</li>
+                        <li><strong>Try again</strong> - codes expire after 15 minutes</li>
+                        <li><strong>Check</strong> Seedr account status</li>
+                        <li><strong>Clear</strong> browser cache and cookies</li>
+                    </ol>
+                </div>
+
+                <div class="error-box">
+                    <h4>❌ Torrents Not Processing</h4>
+                    <p><strong>Problem:</strong> Torrent files aren't being uploaded to Seedr</p>
+                    <p><strong>Solutions:</strong></p>
+                    <ol>
+                        <li><strong>Check</strong> torrent directory permissions</li>
+                        <li><strong>Verify</strong> watcher is running</li>
+                        <li><strong>Check</strong> file extensions (must be <code>.torrent</code> or
+                            <code>.magnet</code>)</li>
+                        <li><strong>Review</strong> log files for errors</li>
+                        <li><strong>Restart</strong> the watcher service</li>
+                    </ol>
+                </div>
+
+                <h3>Debug Mode</h3>
+                <p><strong>To troubleshoot issues:</strong></p>
+                <ol>
+                    <li><strong>Close</strong> the main application</li>
+                    <li><strong>Run</strong> <code>debug.bat</code> instead of <code>SonarrSeedr.exe</code></li>
+                    <li><strong>Read</strong> the error messages in the console</li>
+                    <li><strong>Check</strong> the log file: <code>_internal\folder_watcher.log</code></li>
+                </ol>
+
+                <h3>Log Files</h3>
+                <p><strong>Important log locations:</strong></p>
+                <ul>
+                    <li><strong>Main log:</strong> <code>_internal\folder_watcher.log</code></li>
+                    <li><strong>Application logs:</strong> Console output when running <code>debug.bat</code></li>
+                    <li><strong>Sonarr logs:</strong> Check Sonarr's log directory</li>
+                    <li><strong>Windows Event Viewer:</strong> For system-level errors</li>
+                </ul>
+
+                <h3>Quick Reference Table</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Problem</th>
+                            <th>Solution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>App won't start</td>
+                            <td>Run as Administrator or use debug.bat</td>
+                        </tr>
+                        <tr>
+                            <td>Port 8242 busy</td>
+                            <td>Run: <code>SonarrSeedr.exe --port 8001</code></td>
+                        </tr>
+                        <tr>
+                            <td>Authentication fails</td>
+                            <td>Check internet, try new device code</td>
+                        </tr>
+                        <tr>
+                            <td>Sonarr not connecting</td>
+                            <td>Verify host URL and Sonarr is running</td>
+                        </tr>
+                        <tr>
+                            <td>Torrents not processing</td>
+                            <td>Check folder permissions and watcher status</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- FAQ -->
+            <section id="faq">
+                <h2>❓ Frequently Asked Questions</h2>
+
+                <h3>General Questions</h3>
+
+                <div class="info-box">
+                    <h4>Q: Do I need to keep the application running?</h4>
+                    <p>A: Yes, the application must be running to monitor for new torrent files and manage downloads.
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <h4>Q: Can I use this without Sonarr?</h4>
+                    <p>A: Yes, you can use it just for downloading torrents to Seedr cloud storage without Sonarr
+                        integration.</p>
+                </div>
+
+                <div class="info-box">
+                    <h4>Q: Is this legal?</h4>
+                    <p>A: The plugin is a tool. You are responsible for ensuring you have the right to download the
+                        content you're accessing.</p>
+                </div>
+
+                <div class="info-box">
+                    <h4>Q: Can I run this on a server?</h4>
+                    <p>A: Yes, but you'll need to configure firewall rules and may need to run it as a service.</p>
+                </div>
+
+                <h3>Technical Questions</h3>
+
+                <div class="info-box">
+                    <h4>Q: What file formats are supported?</h4>
+                    <p>A: The plugin supports <code>.torrent</code> files and <code>.magnet</code> files (magnet links
+                        saved as text files).</p>
+                </div>
+
+                <div class="info-box">
+                    <h4>Q: Can I change the web interface port?</h4>
+                    <p>A: Yes, use the <code>--port</code> command line option: <code>SonarrSeedr.exe --port 8001</code>
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <h4>Q: How do I update the plugin?</h4>
+                    <p>A: Download the latest version and replace the files, keeping your configuration files in the
+                        <code>_internal</code> folder.</p>
+                </div>
+
+                <div class="info-box">
+                    <h4>Q: Can I use this with other media managers?</h4>
+                    <p>A: Currently, it's designed for Sonarr, but you can use it without Sonarr for basic torrent
+                        downloading.</p>
+                </div>
+
+                <h3>Performance Questions</h3>
+
+                <div class="info-box">
+                    <h4>Q: The application uses too much memory</h4>
+                    <p>A: This is normal for Python applications. Consider closing other applications if needed, or
+                        increase your system RAM.</p>
+                </div>
+
+                <div class="info-box">
+                    <h4>Q: Downloads are slow</h4>
+                    <p>A: This depends on your Seedr account type (free vs premium) and your internet connection speed.
+                        Premium Seedr accounts offer faster downloads.</p>
+                </div>
+            </section>
+
+            <!-- Getting Help -->
+            <section>
+                <h2>🆘 Getting Help</h2>
+
+                <h3>Support Resources</h3>
+                <ol>
+                    <li><strong>Documentation:</strong> Check <code>README.md</code>, <code>QUICK_SETUP_STEPS.md</code>
+                    </li>
+                    <li><strong>Debug Mode:</strong> Run <code>debug.bat</code> for detailed error information</li>
+                    <li><strong>Log Files:</strong> Check <code>_internal\folder_watcher.log</code> for application logs
+                    </li>
+                </ol>
+
+                <h3>Before Asking for Help</h3>
+                <ol>
+                    <li><strong>Read</strong> this guide completely</li>
+                    <li><strong>Check</strong> the troubleshooting section</li>
+                    <li><strong>Run</strong> debug mode and check logs</li>
+                    <li><strong>Verify</strong> all prerequisites are met</li>
+                    <li><strong>Try</strong> restarting the application</li>
+                </ol>
+
+                <h3>Information to Include When Asking for Help</h3>
+                <ul>
+                    <li><strong>Windows version</strong> (e.g., Windows 10 21H2)</li>
+                    <li><strong>Error messages</strong> from debug mode</li>
+                    <li><strong>Log file contents</strong> (last 50 lines)</li>
+                    <li><strong>Steps</strong> you've already tried</li>
+                    <li><strong>Configuration</strong> you're using</li>
+                </ul>
+            </section>
+
+            <!-- Success -->
+            <section>
+                <div class="success-box">
+                    <h2>🎉 Success!</h2>
+                    <p>Once everything is set up correctly, you should have:</p>
+                    <ul>
+                        <li>✅ <strong>Automatic torrent monitoring</strong> - Drop torrent files and they're processed
+                            automatically</li>
+                        <li>✅ <strong>Cloud downloading</strong> - Torrents download to your Seedr cloud storage</li>
+                        <li>✅ <strong>Local organization</strong> - Files are downloaded and organized by Sonarr</li>
+                        <li>✅ <strong>Web interface</strong> - Easy management through your browser</li>
+                        <li>✅ <strong>Seamless workflow</strong> - From torrent file to organized TV show library</li>
+                    </ul>
+                    <p style="font-size: 1.2em; margin-top: 20px;"><strong>Enjoy your automated TV show downloading
+                            experience! 🎬📺</strong></p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <a href="#" class="back-to-top" title="Back to Top">↑</a>
+
+    <footer>
+        <p style="font-size: 1.1em;">Made with ❤️ for the Plex/Sonarr community</p>
+        <p style="margin-top: 10px;">Licensed under MIT License</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Show/hide back to top button
+        window.addEventListener('scroll', function () {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>
