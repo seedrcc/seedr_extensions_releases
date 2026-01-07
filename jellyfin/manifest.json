@@ -9,20 +9,20 @@
     "imageUrl": "https://raw.githubusercontent.com/seedrcc/seedr_extensions_releases/main/jellyfin/images/seedr-logo.png",
     "versions": [
       {
+        "version": "1.0.6.32",
+        "changelog": "Build v1.0.6.32\n- Minor updates and fixes",
+        "targetAbi": "10.10.0.0",
+        "sourceUrl": "https://raw.githubusercontent.com/seedrcc/seedr_extensions_releases/main/jellyfin/plugins/Seedr-Jellyfin-Plugin-v1.0.6.32.zip",
+        "checksum": "3f17fdc723c7667bd90eab834ab74d75",
+        "timestamp": "2026-01-07T16:44:11Z"
+      },
+      {
         "version": "1.0.6.31",
         "changelog": "Build v1.0.6.31\n- Minor updates and fixes",
         "targetAbi": "10.10.0.0",
         "sourceUrl": "https://raw.githubusercontent.com/seedrcc/seedr_extensions_releases/main/jellyfin/plugins/Seedr-Jellyfin-Plugin-v1.0.6.31.zip",
         "checksum": "4d079d6acb1d5f0c2a5a410feb6030c2",
         "timestamp": "2026-01-07T16:06:42Z"
-      },
-      {
-        "version": "1.0.6.30",
-        "changelog": "Build v1.0.6.30\n- Minor updates and fixes",
-        "targetAbi": "10.10.0.0",
-        "sourceUrl": "https://raw.githubusercontent.com/seedrcc/seedr_extensions_releases/main/jellyfin/plugins/Seedr-Jellyfin-Plugin-v1.0.6.30.zip",
-        "checksum": "19014450de713cdf02778e441ab531fb",
-        "timestamp": "2026-01-07T15:57:22Z"
       }
     ]
   }
