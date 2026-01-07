@@ -2,12 +2,20 @@
   {
     "guid": "a8f12c45-3d67-4e89-b123-456789abcdef",
     "name": "Seedr",
-    "description": "Stream your Seedr cloud storage files directly in Jellyfin. Seamlessly browse and play movies, TV shows, and music from your Seedr account without downloading. Features include automatic library sync, OAuth authentication with QR code support, and optimized HLS streaming for fast playback.",
+    "description": "Stream your Seedr cloud storage files directly in Jellyfin. Seamlessly browse and play videos, music from your Seedr account without downloading. Features include automatic library sync, OAuth authentication with QR code support, and optimized HLS streaming for fast playback.",
     "overview": "Stream media from Seedr cloud storage",
     "owner": "seedr",
     "category": "Entertainment",
     "imageUrl": "https://raw.githubusercontent.com/seedrcc/seedr_extensions_releases/main/jellyfin/images/seedr-logo.png",
     "versions": [
+      {
+        "version": "1.0.6.36",
+        "changelog": "Build v1.0.6.36\n- Minor updates and fixes",
+        "targetAbi": "10.10.0.0",
+        "sourceUrl": "https://raw.githubusercontent.com/seedrcc/seedr_extensions_releases/main/jellyfin/plugins/Seedr-Jellyfin-Plugin-v1.0.6.36.zip",
+        "checksum": "4c1ea6518837392af2cd93ec9de7b704",
+        "timestamp": "2026-01-07T17:13:17Z"
+      },
       {
         "version": "1.0.6.35",
         "changelog": "Build v1.0.6.35\n- Minor updates and fixes",
@@ -15,14 +23,6 @@
         "sourceUrl": "https://raw.githubusercontent.com/seedrcc/seedr_extensions_releases/main/jellyfin/plugins/Seedr-Jellyfin-Plugin-v1.0.6.35.zip",
         "checksum": "bed0bd0e2632a5b8bb35fd6a53ea29ef",
         "timestamp": "2026-01-07T17:08:57Z"
-      },
-      {
-        "version": "1.0.6.34",
-        "changelog": "Build v1.0.6.34\n- Minor updates and fixes",
-        "targetAbi": "10.10.0.0",
-        "sourceUrl": "https://raw.githubusercontent.com/seedrcc/seedr_extensions_releases/main/jellyfin/plugins/Seedr-Jellyfin-Plugin-v1.0.6.34.zip",
-        "checksum": "0525130257a0fa8a6b838195b423dd90",
-        "timestamp": "2026-01-07T17:00:24Z"
       }
     ]
   }
