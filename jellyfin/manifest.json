@@ -1,0 +1,29 @@
+[
+  {
+    "guid": "a8f12c45-3d67-4e89-b123-456789abcdef",
+    "name": "Seedr",
+    "description": "Stream your Seedr cloud storage files directly in Jellyfin. Seamlessly browse and play movies, TV shows, and music from your Seedr account without downloading. Features include automatic library sync, OAuth authentication with QR code support, and optimized HLS streaming for fast playback.",
+    "overview": "Stream media from Seedr cloud storage",
+    "owner": "seedr",
+    "category": "Entertainment",
+    "imageUrl": "https://raw.githubusercontent.com/seedrcc/seedr_extensions_releases/main/jellyfin/images/seedr-logo.png",
+    "versions": [
+      {
+        "version": "1.0.6.21",
+        "changelog": "Build v1.0.6.21\n- Minor updates and fixes",
+        "targetAbi": "10.10.0.0",
+        "sourceUrl": "https://raw.githubusercontent.com/seedrcc/seedr_extensions_releases/main/jellyfin/plugins/Seedr-Jellyfin-Plugin-v1.0.6.21.zip",
+        "checksum": "7f98b1149197f3fca319b9ed13d06205",
+        "timestamp": "2026-01-07T15:35:22Z"
+      },
+      {
+        "version": "1.0.6.20",
+        "changelog": "Build v1.0.6.20\n- Minor updates and fixes",
+        "targetAbi": "10.10.0.0",
+        "sourceUrl": "https://raw.githubusercontent.com/seedrcc/seedr_extensions_releases/main/jellyfin/plugins/Seedr-Jellyfin-Plugin-v1.0.6.20.zip",
+        "checksum": "062393c380bbf50c53b75d3c4c3d2b1c",
+        "timestamp": "2026-01-07T15:34:16Z"
+      }
+    ]
+  }
+]
